@@ -424,9 +424,16 @@
             text-decoration: none;
             font-weight: 500;
             font-size: 0.9rem;
+            background: white;
+            padding: 8px 16px;
+            border-radius: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
         }
         .back-link:hover {
-            text-decoration: underline;
+            background: #f1f5f9;
+            text-decoration: none;
+            transform: translateY(-1px);
         }
 
         @media (max-width: 860px) {
@@ -450,7 +457,7 @@
 </head>
 <body>
 
-<a href="../" class="back-link">← Quay lại danh sách demo</a>
+<a href="../../" class="back-link">← Quay lại</a>
 
 <div class="dashboard">
     <!-- 左侧区域: 格式工具 + 团队文本 (IMG_2215, IMG_2212) -->
