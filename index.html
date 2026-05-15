@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ==================== BIẾN TOÀN CỤC ==================== */
+        /* ========== BIẾN TOÀN CỤC ========== */
         :root {
             --bg: #f4f6fb;
             --bg-secondary: #ffffff;
@@ -25,7 +25,6 @@
             --toggle-bg: rgba(255, 255, 255, 0.5);
             --wallpaper: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
-
         [data-theme="dark"] {
             --bg: #0f172a;
             --bg-secondary: #1e293b;
@@ -43,7 +42,6 @@
             --toggle-bg: rgba(30, 41, 59, 0.6);
             --wallpaper: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', system-ui, sans-serif;
@@ -55,7 +53,6 @@
             transition: background-color 0.3s, color 0.3s;
             position: relative;
         }
-        /* Hiệu ứng nền lỏng */
         body::before {
             content: "";
             position: fixed;
@@ -78,14 +75,9 @@
             z-index: 0;
             pointer-events: none;
         }
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
+        .container { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
 
-        /* ==================== HEADER ==================== */
+        /* ========== HEADER ========== */
         .header {
             text-align: center;
             margin-bottom: 2rem;
@@ -94,7 +86,6 @@
             font-size: 2.8rem;
             font-weight: 700;
             color: var(--text);
-            margin-bottom: 0.5rem;
             letter-spacing: -0.5px;
             background: var(--glass-bg);
             backdrop-filter: blur(12px);
@@ -111,54 +102,39 @@
             font-weight: 400;
             margin-top: 0.5rem;
         }
-        .header .badge {
-            display: inline-block;
-            margin-top: 0.75rem;
-            background: var(--glass-bg);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            color: var(--text);
-            padding: 6px 18px;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            border: 1px solid var(--glass-border);
-        }
 
-        /* ==================== TOOLBAR ==================== */
-        .theme-toggle-wrapper {
+        /* ========== TOOLBAR ========== */
+        .toolbar {
             display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 1.5rem 0;
             flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 2rem;
         }
-        .theme-toggle {
-            background: var(--toggle-bg);
+        .toolbar button {
+            font-family: 'Inter', sans-serif;
+            background: var(--glass-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--glass-border);
             border-radius: 50px;
             padding: 10px 22px;
-            cursor: pointer;
-            font-size: 1rem;
             color: var(--text);
-            transition: all 0.3s ease;
-            display: flex;
+            font-size: .9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all .25s ease;
+            display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             box-shadow: var(--glass-shadow);
-            font-family: 'Inter', sans-serif;
         }
-        .theme-toggle:hover {
+        .toolbar button:hover {
             background: var(--card-hover-bg);
-            transform: scale(1.05);
-        }
-        .theme-toggle i {
-            transition: transform 0.3s ease;
+            transform: translateY(-2px);
         }
 
-        /* ==================== DEMO GRID ==================== */
+        /* ========== DEMO GRID ========== */
         .demo-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -219,25 +195,8 @@
             color: var(--text-secondary);
             line-height: 1.5;
         }
-        .card-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 4px;
-        }
-        .tag {
-            font-size: 0.75rem;
-            font-weight: 500;
-            padding: 4px 10px;
-            border-radius: 20px;
-            background: var(--tag-bg);
-            color: var(--tag-color);
-        }
-        .tag.html { background: rgba(239,68,68,0.15); color: #ef4444; }
-        .tag.css  { background: rgba(59,130,246,0.15); color: #3b82f6; }
-        .tag.js   { background: rgba(234,179,8,0.15); color: #eab308; }
 
-        /* ==================== FOOTER ==================== */
+        /* ========== FOOTER ========== */
         .footer {
             text-align: center;
             margin-top: 3rem;
@@ -248,8 +207,6 @@
             -webkit-backdrop-filter: blur(12px);
             padding: 1rem;
             border-radius: 60px;
-            display: inline-block;
-            width: 100%;
             border: 1px solid var(--glass-border);
         }
         .footer a {
@@ -259,7 +216,7 @@
         }
         .footer a:hover { text-decoration: underline; }
 
-        /* ==================== MODAL ==================== */
+        /* ========== MODAL ========== */
         .modal {
             display: none;
             position: fixed;
@@ -279,7 +236,7 @@
             border: 1px solid var(--glass-border);
             border-radius: 28px;
             padding: 2rem;
-            max-width: 600px;
+            max-width: 580px;
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
@@ -289,8 +246,7 @@
         .modal-content h2 { margin-top: 0; }
         .close {
             position: absolute;
-            right: 1.5rem;
-            top: 1rem;
+            right: 1.5rem; top: 1rem;
             font-size: 2rem;
             cursor: pointer;
             color: var(--text-secondary);
@@ -328,7 +284,7 @@
         }
         .btn-apply:hover { background: var(--card-hover-bg); }
 
-        /* ==================== RESPONSIVE ==================== */
+        /* ========== RESPONSIVE ========== */
         @media (max-width: 600px) {
             body { padding: 1.5rem 1rem; }
             .header h1 { font-size: 1.8rem; }
@@ -341,19 +297,17 @@
 <div class="container">
     <!-- Header -->
     <div class="header">
-        <h1> những Demo Thiết Kế Frontend</h1>
+        <h1>🎨 Những Demo Thiết Kế Frontend</h1>
         <p class="subtitle">Bộ sưu tập các giao diện được xây dựng bằng HTML, CSS và JavaScript thuần.</p>
-        <span class="badge"><i class="fas fa-code-branch"></i> Open Source · MIT License</span>
     </div>
 
     <!-- Toolbar -->
-    <div class="theme-toggle-wrapper">
-        <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">
-            <i class="fas fa-moon" id="themeIcon"></i>
-            <span id="themeLabel">Dark Mode</span>
+    <div class="toolbar">
+        <button onclick="toggleTheme()" id="themeToggle">
+            <i class="fas fa-moon" id="themeIcon"></i> <span id="themeLabel">Dark Mode</span>
         </button>
-        <button class="theme-toggle" onclick="openCustomizeModal()">
-            <i class="fas fa-palette"></i> <span>Tùy chỉnh giao diện</span>
+        <button onclick="openCustomizeModal()">
+            <i class="fas fa-palette"></i> Tùy chỉnh giao diện
         </button>
     </div>
 
@@ -365,29 +319,10 @@
             </div>
             <div class="card-body">
                 <div class="demo-title">Liquid Glass</div>
-                <div class="demo-desc">Bộ sưu tập 10 thành phần kính lỏng hiện đại: Card, Button, Form, Sidebar...</div>
-                <div class="card-tags">
-                    <span class="tag html">HTML</span>
-                    <span class="tag css">CSS</span>
-                    <span class="tag js">JavaScript</span>
-                </div>
+                <div class="demo-desc">Bộ sưu tập 10 thành phần giao diện kính lỏng với hiệu ứng biến dạng động.</div>
             </div>
         </a>
-
-        <a href="kree8-studio/" class="demo-card">
-            <div class="card-preview">
-                <span class="icon"></span>
-            </div>
-            <div class="card-body">
-                <div class="demo-title">Kree8 Studio</div>
-                <div class="demo-desc">Dashboard sáng tạo – Toolbar, Team card, Status badges.</div>
-                <div class="card-tags">
-                    <span class="tag html">HTML</span>
-                    <span class="tag css">CSS</span>
-                    <span class="tag js">JavaScript</span>
-                </div>
-            </div>
-        </a>
+        <!-- Có thể thêm demo mới ở đây -->
     </div>
 
     <!-- Footer -->
@@ -396,11 +331,11 @@
     </div>
 </div>
 
-<!-- Modal Tùy chỉnh Giao diện -->
+<!-- Modal Tùy chỉnh nền -->
 <div class="modal" id="customizeModal">
     <div class="modal-content">
         <span class="close" onclick="closeCustomizeModal()">&times;</span>
-        <h2> Tùy chỉnh giao diện</h2>
+        <h2>🎨 Tùy chỉnh giao diện</h2>
         <div class="section">
             <h3>Màu nền có sẵn</h3>
             <div class="color-grid" id="colorGrid"></div>
@@ -409,17 +344,18 @@
             <h3>Hoặc tải ảnh lên</h3>
             <input type="file" id="bgImageInput" accept="image/*" style="display:none">
             <button class="btn-apply" onclick="document.getElementById('bgImageInput').click()">📁 Chọn ảnh</button>
-            <button class="btn-apply" onclick="resetBackground()"> Đặt lại mặc định</button>
+            <button class="btn-apply" onclick="resetBackground()">🔄 Đặt lại mặc định</button>
         </div>
     </div>
 </div>
 
 <script>
-    // ==================== DARK/LIGHT MODE ====================
+(function() {
+    // ==================== DARK MODE ====================
     const html = document.documentElement;
     const themeIcon = document.getElementById('themeIcon');
     const themeLabel = document.getElementById('themeLabel');
-    
+
     function setTheme(mode) {
         html.setAttribute('data-theme', mode);
         if (mode === 'dark') {
@@ -431,14 +367,14 @@
         }
         localStorage.setItem('theme', mode);
     }
-    
+
     window.toggleTheme = function() {
         const current = html.getAttribute('data-theme');
         setTheme(current === 'dark' ? 'light' : 'dark');
     };
-    
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setTheme(savedTheme);
+
+    const saved = localStorage.getItem('theme') || 'light';
+    setTheme(saved);
 
     // ==================== BACKGROUND CUSTOMIZATION ====================
     const bgSettings = JSON.parse(localStorage.getItem('bgSettings')) || {};
@@ -454,10 +390,7 @@
             document.body.style.backgroundAttachment = 'fixed';
             document.body.style.backgroundColor = '';
         } else {
-            // Mặc định: sử dụng biến CSS
-            document.body.style.backgroundImage = getComputedStyle(document.documentElement).getPropertyValue('--wallpaper');
-            document.body.style.backgroundSize = '';
-            document.body.style.backgroundPosition = '';
+            document.body.style.backgroundImage = '';
             document.body.style.backgroundColor = '';
         }
     }
@@ -475,7 +408,6 @@
 
     function renderColorGrid() {
         const grid = document.getElementById('colorGrid');
-        grid.innerHTML = '';
         colorPresets.forEach(c => {
             const swatch = document.createElement('div');
             swatch.className = 'color-swatch';
@@ -524,10 +456,9 @@
         if (e.target === this) closeCustomizeModal();
     });
 
-    // Khởi tạo
     renderColorGrid();
     applyBackground();
+})();
 </script>
-
 </body>
 </html>
