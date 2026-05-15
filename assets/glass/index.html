@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi" data-theme="dark">
+<html lang="vi" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,21 +9,7 @@
     <style>
         /* ========== BIẾN TOÀN CỤC ========== */
         :root {
-            --bg: #0a0a0a;
-            --bg-secondary: #111111;
-            --text: #ffffff;
-            --text-secondary: rgba(255,255,255,0.7);
-            --accent: #ffffff;
-            --accent-light: rgba(255,255,255,0.8);
-            --glass-bg: rgba(255,255,255,0.08);
-            --glass-border: rgba(255,255,255,0.12);
-            --glass-shadow: 0 8px 32px rgba(0,0,0,0.4);
-            --card-bg: rgba(20,20,20,0.6);
-            --card-hover-bg: rgba(30,30,30,0.8);
-            --wallpaper: radial-gradient(ellipse at 30% 20%, #1a1a2e 0%, #0f0f1a 40%, #0a0a0f 80%, #050510 100%);
-        }
-        [data-theme="light"] {
-            --bg: #e8ecf1;
+            --bg: #b8f0d4;
             --bg-secondary: #f4f6fb;
             --text: #1a1a2e;
             --text-secondary: rgba(0,0,0,0.6);
@@ -34,7 +20,21 @@
             --glass-shadow: 0 8px 32px rgba(0,0,0,0.08);
             --card-bg: rgba(255,255,255,0.4);
             --card-hover-bg: rgba(255,255,255,0.6);
-            --wallpaper: radial-gradient(ellipse at 30% 20%, #dce3f0 0%, #e8ecf1 40%, #f0f3f8 80%, #d8dde8 100%);
+            --wallpaper: radial-gradient(ellipse at 30% 20%, #b8f0d4 0%, #7ed8a0 40%, #98e8b8 80%, #c8f8d8 100%);
+        }
+        [data-theme="dark"] {
+            --bg: #0a2e1a;
+            --bg-secondary: #111111;
+            --text: #ffffff;
+            --text-secondary: rgba(255,255,255,0.7);
+            --accent: #ffffff;
+            --accent-light: rgba(255,255,255,0.8);
+            --glass-bg: rgba(255,255,255,0.08);
+            --glass-border: rgba(255,255,255,0.12);
+            --glass-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            --card-bg: rgba(20,20,20,0.6);
+            --card-hover-bg: rgba(30,30,30,0.8);
+            --wallpaper: radial-gradient(ellipse at 30% 20%, #1a3a2a 0%, #0f2a1f 40%, #0a1f15 80%, #051a10 100%);
         }
         *{margin:0;padding:0;box-sizing:border-box}
         body{
@@ -56,7 +56,7 @@
             content:"";position:fixed;
             top:-120px;left:-120px;
             width:500px;height:500px;
-            background:radial-gradient(circle,rgba(120,140,255,.12) 0%,transparent 70%);
+            background:radial-gradient(circle,rgba(120,255,160,.12) 0%,transparent 70%);
             border-radius:50%;z-index:-1;pointer-events:none;
         }
 
@@ -162,7 +162,7 @@
         .glass-specular{z-index:3;box-shadow:inset 1px 1px 1px var(--highlight,rgba(255,255,255,.75))}
         .glass-content{position:relative;z-index:4}
 
-        /* ========== CARD CRD004 ========== */
+        /* ========== CARD ========== */
         .glass-card{
             --bg-color:rgba(255,255,255,.25);--highlight:rgba(255,255,255,.75);
             position:relative;width:260px;height:180px;
@@ -177,7 +177,7 @@
         .glass-card .glass-content h3{margin:0 0 8px;font-size:22px;font-weight:600}
         .glass-card .glass-content p{margin:0;opacity:.8;font-size:.9rem}
 
-        /* ========== BUTTON BTN003 ========== */
+        /* ========== BUTTON ========== */
         .glass-button{
             --bg-color:rgba(255,255,255,.25);--highlight:rgba(255,255,255,.75);
             position:relative;padding:12px 28px;border:none;
@@ -189,7 +189,7 @@
         .glass-button:active{transform:scale(.95)}
         .glass-button .glass-content{color:#fff;font-weight:500}
 
-        /* ========== ICONS ICO001 ========== */
+        /* ========== ICONS ========== */
         .glass-icons-grid{
             display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
         }
@@ -206,7 +206,7 @@
             justify-content:center;align-items:center;color:#fff;font-size:22px;
         }
 
-        /* ========== TOGGLE TGL001 ========== */
+        /* ========== TOGGLE ========== */
         .glass-toggle-group{display:flex;flex-direction:column;gap:16px;min-width:200px}
         .glass-toggle{
             --bg-color:rgba(255,255,255,.25);--highlight:rgba(255,255,255,.75);
@@ -232,7 +232,7 @@
             background:rgba(255,255,255,.4);
         }
 
-        /* ========== SPINNER LDR003 ========== */
+        /* ========== SPINNER ========== */
         .glass-spinner{
             --bg-color:rgba(255,255,255,.25);--highlight:rgba(255,255,255,.75);
             position:relative;width:72px;height:72px;
@@ -256,7 +256,7 @@
         @keyframes spin{to{transform:rotate(360deg)}}
         @keyframes pulse{from{transform:scale(.8);opacity:.5}to{transform:scale(1);opacity:.8}}
 
-        /* ========== DROPDOWN DRP001 ========== */
+        /* ========== DROPDOWN ========== */
         .glass-dropdown-list{
             --bg-color:rgba(255,255,255,.25);--highlight:rgba(255,255,255,.75);
             display:flex;flex-direction:column;gap:12px;width:100%;max-width:400px;
@@ -289,7 +289,7 @@
         .dropdown-content ul{list-style:none;margin:0;padding:0}
         .dropdown-content li{margin:8px 0;font-size:.9rem}
 
-        /* ========== SEARCH SRH002 ========== */
+        /* ========== SEARCH ========== */
         .glass-search{
             --bg-color:rgba(255,255,255,.25);--highlight:rgba(255,255,255,.75);
             --input-bg:rgba(255,255,255,.1);--input-border:rgba(255,255,255,.2);
@@ -339,7 +339,7 @@
         }
         .search-suggestions li:hover{background:rgba(255,255,255,.1)}
 
-        /* ========== FORM FRM001 ========== */
+        /* ========== FORM ========== */
         .glass-form{
             --bg-color:rgba(255,255,255,.25);--highlight:rgba(255,255,255,.75);
             --input-bg:rgba(255,255,255,.1);--input-border:rgba(255,255,255,.2);
@@ -374,7 +374,7 @@
         .form-switch a{color:#fff;text-decoration:none;font-weight:600}
         .form-switch a:hover{text-decoration:underline}
 
-        /* ========== NAV NAV002 ========== */
+        /* ========== NAV ========== */
         .glass-nav{
             --bg-color:rgba(255,255,255,.25);--highlight:rgba(255,255,255,.75);
             position:relative;width:100%;max-width:600px;
@@ -392,7 +392,7 @@
         }
         .nav-item:hover,.nav-item.active{background-color:rgba(255,255,255,.15)}
 
-        /* ========== SIDEBAR SBR001 ========== */
+        /* ========== SIDEBAR ========== */
         .glass-sidebar{
             --bg-color:rgba(255,255,255,.25);--highlight:rgba(255,255,255,.75);
             position:relative;width:100%;max-width:260px;
@@ -489,24 +489,24 @@
 <a href="../../" class="back-link"><i class="fas fa-arrow-left"></i> Quay lại danh sách demo</a>
 
 <div class="container">
-    <!-- ========== HEADER ========== -->
+    <!-- Header -->
     <div class="header">
-        <h1>🧊 Bộ Sưu Tập Liquid Glass</h1>
+        <h1>Bộ Sưu Tập Liquid Glass</h1>
         <p class="subtitle">10 thành phần giao diện kính lỏng — hiệu ứng biến dạng, trong suốt và tương tác động</p>
     </div>
 
-    <!-- ========== TOOLBAR ========== -->
+    <!-- Toolbar -->
     <div class="toolbar">
         <button onclick="toggleTheme()" id="themeToggleBtn">
-            <i class="fas fa-moon" id="themeIcon"></i> <span id="themeLabel">Chế độ Sáng</span>
+            <i class="fas fa-moon" id="themeIcon"></i> <span id="themeLabel">Chế độ tối</span>
         </button>
         <button onclick="openCustomizeModal()">
             <i class="fas fa-palette"></i> Tùy chỉnh hình nền
         </button>
     </div>
 
-    <!-- ========== SECTION 1: ĐIỀU HƯỚNG & TÌM KIẾM ========== -->
-    <div class="section-title">🧭 Điều hướng &amp; Tìm kiếm</div>
+    <!-- Section: Điều hướng & Tìm kiếm -->
+    <div class="section-title">Điều hướng &amp; Tìm kiếm</div>
     <div class="comp-grid">
         <div class="comp-cell">
             <div class="glass-nav">
@@ -530,7 +530,7 @@
                         <input type="text" class="search-input" placeholder="Tìm kiếm thành phần...">
                     </div>
                     <div class="search-suggestions active">
-                        <h4>🔍 Tìm kiếm gần đây</h4>
+                        <h4>Tìm kiếm gần đây</h4>
                         <ul>
                             <li><i class="fas fa-clock"></i> Hiệu ứng kính lỏng</li>
                             <li><i class="fas fa-clock"></i> Thiết kế giao diện hiện đại</li>
@@ -542,8 +542,8 @@
         </div>
     </div>
 
-    <!-- ========== SECTION 2: THẺ & NÚT ========== -->
-    <div class="section-title">🃏 Thẻ &amp; Nút</div>
+    <!-- Section: Thẻ & Nút -->
+    <div class="section-title">Thẻ &amp; Nút</div>
     <div class="comp-grid">
         <div class="comp-cell">
             <div class="glass-card">
@@ -559,13 +559,13 @@
             <button class="glass-button">
                 <div class="glass-filter"></div><div class="glass-overlay"></div>
                 <div class="glass-specular"></div>
-                <span class="glass-content">🚀 Khám Phá Ngay</span>
+                <span class="glass-content">Khám Phá Ngay</span>
             </button>
         </div>
     </div>
 
-    <!-- ========== SECTION 3: BIỂU TƯỢNG & CHUYỂN ĐỔI ========== -->
-    <div class="section-title">🎛️ Biểu tượng &amp; Chuyển đổi</div>
+    <!-- Section: Biểu tượng & Chuyển đổi -->
+    <div class="section-title">Biểu tượng &amp; Chuyển đổi</div>
     <div class="comp-grid">
         <div class="comp-cell">
             <div class="glass-icons-grid">
@@ -596,8 +596,8 @@
         </div>
     </div>
 
-    <!-- ========== SECTION 4: ĐỔ XUỐNG & ĐANG TẢI ========== -->
-    <div class="section-title">📋 Menu &amp; Trạng thái</div>
+    <!-- Section: Menu & Trạng thái -->
+    <div class="section-title">Menu &amp; Trạng thái</div>
     <div class="comp-grid">
         <div class="comp-cell">
             <div class="glass-dropdown-list">
@@ -605,7 +605,7 @@
                     <input type="checkbox" class="dropdown-toggle" id="dd1">
                     <label class="dropdown-header" for="dd1">
                         <div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div>
-                        <div class="glass-content">✨ Tính năng <span class="dropdown-arrow">▼</span></div>
+                        <div class="glass-content">Tính năng <span class="dropdown-arrow">▼</span></div>
                     </label>
                     <div class="dropdown-content">
                         <div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div>
@@ -616,7 +616,7 @@
                     <input type="checkbox" class="dropdown-toggle" id="dd2">
                     <label class="dropdown-header" for="dd2">
                         <div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div>
-                        <div class="glass-content">📖 Tài liệu <span class="dropdown-arrow">▼</span></div>
+                        <div class="glass-content">Tài liệu <span class="dropdown-arrow">▼</span></div>
                     </label>
                     <div class="dropdown-content">
                         <div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div>
@@ -627,7 +627,7 @@
                     <input type="checkbox" class="dropdown-toggle" id="dd3">
                     <label class="dropdown-header" for="dd3">
                         <div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div>
-                        <div class="glass-content">🆘 Hỗ trợ <span class="dropdown-arrow">▼</span></div>
+                        <div class="glass-content">Hỗ trợ <span class="dropdown-arrow">▼</span></div>
                     </label>
                     <div class="dropdown-content">
                         <div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div>
@@ -647,8 +647,8 @@
         </div>
     </div>
 
-    <!-- ========== SECTION 5: FORM & SIDEBAR ========== -->
-    <div class="section-title">📝 Biểu mẫu &amp; Thanh bên</div>
+    <!-- Section: Biểu mẫu & Thanh bên -->
+    <div class="section-title">Biểu mẫu &amp; Thanh bên</div>
     <div class="comp-grid">
         <div class="comp-cell">
             <div class="glass-form">
@@ -690,11 +690,11 @@
     </div>
 </div>
 
-<!-- ========== MODAL TÙY CHỈNH HÌNH NỀN ========== -->
+<!-- Modal Tùy chỉnh hình nền -->
 <div class="modal" id="customizeModal">
     <div class="modal-content">
         <span class="close" onclick="closeCustomizeModal()">&times;</span>
-        <h2>🎨 Tùy chỉnh hình nền</h2>
+        <h2>Tùy chỉnh hình nền</h2>
         <div class="section">
             <h3>Màu nền có sẵn</h3>
             <div class="color-grid" id="colorGrid"></div>
@@ -702,15 +702,15 @@
         <div class="section">
             <h3>Hoặc tải ảnh của bạn lên</h3>
             <input type="file" id="bgImageInput" accept="image/*" style="display:none">
-            <button class="btn-apply" onclick="document.getElementById('bgImageInput').click()">📁 Chọn ảnh</button>
-            <button class="btn-apply" id="resetBgBtn" onclick="resetBackground()">🔄 Đặt lại mặc định</button>
+            <button class="btn-apply" onclick="document.getElementById('bgImageInput').click()">Chọn ảnh</button>
+            <button class="btn-apply" id="resetBgBtn" onclick="resetBackground()">Đặt lại mặc định</button>
         </div>
     </div>
 </div>
 
 <script>
 (function(){
-    // ==================== DARK / LIGHT MODE ====================
+    // Dark / Light Mode
     const html = document.documentElement;
     const themeIcon = document.getElementById('themeIcon');
     const themeLabel = document.getElementById('themeLabel');
@@ -732,10 +732,10 @@
         setTheme(cur === 'light' ? 'dark' : 'light');
     };
 
-    const saved = localStorage.getItem('theme') || 'dark';
+    const saved = localStorage.getItem('theme') || 'light';
     setTheme(saved);
 
-    // ==================== BACKGROUND CUSTOMIZATION ====================
+    // Background Customization
     const bgSettings = JSON.parse(localStorage.getItem('bgSettings')) || {};
 
     function applyBackground(){
@@ -756,12 +756,12 @@
     }
 
     const colorPresets = [
+        {name:'Xanh lá mặc định', value:'radial-gradient(ellipse at 30% 20%, #b8f0d4 0%, #7ed8a0 40%, #98e8b8 80%, #c8f8d8 100%)'},
         {name:'Xanh đêm', value:'radial-gradient(ellipse at 30% 20%, #1a1a2e 0%, #0f0f1a 40%, #0a0a0f 80%, #050510 100%)'},
         {name:'Xám sáng', value:'radial-gradient(ellipse at 30% 20%, #dce3f0 0%, #e8ecf1 40%, #f0f3f8 80%, #d8dde8 100%)'},
         {name:'Hồng pastel', value:'radial-gradient(ellipse at 30% 20%, #f7c5c5 0%, #f0a8b8 30%, #e8b4c8 55%, #ddb8d8 80%, #cfc4e8 100%)'},
         {name:'Xanh dương', value:'radial-gradient(ellipse at 30% 20%, #b8d8f8 0%, #8abce8 30%, #98c0e8 55%, #b0c8f0 80%, #c4d8f8 100%)'},
         {name:'Tím mộng mơ', value:'radial-gradient(ellipse at 30% 20%, #d4b8f0 0%, #b28df0 30%, #c4a8f0 55%, #d8c8f8 80%, #e8d8f8 100%)'},
-        {name:'Xanh lá', value:'radial-gradient(ellipse at 30% 20%, #b8f0d4 0%, #7ed8a0 30%, #98e8b8 55%, #b0f0c8 80%, #c8f8d8 100%)'},
         {name:'Cam hoàng hôn', value:'radial-gradient(ellipse at 30% 20%, #f0c898 0%, #e8a878 30%, #f0c0a0 55%, #f8d8c0 80%, #f8e8d8 100%)'},
         {name:'Đen tuyền', value:'#0a0a0a'},
         {name:'Trắng tinh', value:'#fafafa'}
@@ -819,7 +819,7 @@
     renderColorGrid();
     applyBackground();
 
-    // ==================== FORM SWITCH ====================
+    // Form Switch
     const switchToRegister = document.querySelector('.switch-to-register');
     const switchToLogin = document.querySelector('.switch-to-login');
     const loginForm = document.getElementById('loginForm');
@@ -852,7 +852,7 @@
         });
     }
 
-    // ==================== NAV ACTIVE STATE ====================
+    // Nav Active State
     document.querySelectorAll('.nav-list .nav-item').forEach(item => {
         item.addEventListener('click', function(e){
             e.preventDefault();
@@ -861,7 +861,7 @@
         });
     });
 
-    // ==================== SIDEBAR ACTIVE STATE ====================
+    // Sidebar Active State
     document.querySelectorAll('.sidebar-nav .nav-item').forEach(item => {
         item.addEventListener('click', function(e){
             e.preventDefault();
@@ -870,7 +870,7 @@
         });
     });
 
-    // ==================== SEARCH SUGGESTIONS ====================
+    // Search Suggestions
     const searchInput = document.querySelector('.search-input');
     const searchSuggestions = document.querySelector('.search-suggestions');
     if(searchInput && searchSuggestions){
@@ -889,12 +889,12 @@
         });
     }
 
-    // ==================== FORM SUBMISSION ====================
+    // Form Submission
     document.querySelectorAll('.glass-form .form-submit').forEach(btn => {
         btn.addEventListener('click', function(e){
             e.preventDefault();
             const original = this.textContent;
-            this.textContent = '✅ Thành công!';
+            this.textContent = 'Thành công!';
             this.style.background = 'rgba(72,199,142,.4)';
             setTimeout(() => {
                 this.textContent = original;
@@ -903,7 +903,7 @@
         });
     });
 
-    console.log('✅ Liquid Glass Showcase đã sẵn sàng — tất cả tính năng đã được kích hoạt.');
+    console.log('Liquid Glass Showcase đã sẵn sàng — tất cả tính năng đã được kích hoạt.');
 })();
 </script>
 </body>
