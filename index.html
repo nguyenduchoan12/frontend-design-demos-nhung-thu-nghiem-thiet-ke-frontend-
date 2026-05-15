@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Những Demo Thiết Kế Frontend</title>
+    <style>
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #f4f6fb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #1e293b;
+        }
+        .container {
+            max-width: 700px;
+            margin: 2rem;
+            text-align: center;
+        }
+        h1 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .demo-card {
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+            padding: 2rem 1.5rem;
+            text-decoration: none;
+            color: #1e293b;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+        .demo-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 36px rgba(0,0,0,0.08);
+        }
+        .demo-icon {
+            font-size: 3rem;
+        }
+        .demo-title {
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        .demo-desc {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🎨 Những Demo Thiết Kế Frontend</h1>
+    <p class="subtitle">Bộ sưu tập các giao diện được xây dựng bằng HTML, CSS và JavaScript thuần.</p>
+    
+    <div class="demo-grid">
+        <a href="kree8-studio/" class="demo-card">
+            <span class="demo-icon">🖌️</span>
+            <span class="demo-title">Kree8 Studio</span>
+            <span class="demo-desc">Dashboard sáng tạo – Toolbar, Team card, Status badges.</span>
+        </a>
+        <!-- Có thể thêm các demo khác sau -->
+    </div>
+</div>
+</body>
+</html>
