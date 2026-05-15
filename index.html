@@ -7,7 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ========== BIẾN TOÀN CỤC ========== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         :root {
             --bg: #f4f6fb;
             --bg-secondary: #ffffff;
@@ -25,6 +26,7 @@
             --toggle-bg: rgba(255, 255, 255, 0.5);
             --wallpaper: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
+
         [data-theme="dark"] {
             --bg: #0f172a;
             --bg-secondary: #1e293b;
@@ -42,7 +44,7 @@
             --toggle-bg: rgba(30, 41, 59, 0.6);
             --wallpaper: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
             font-family: 'Inter', system-ui, sans-serif;
             background-color: var(--bg);
@@ -53,6 +55,7 @@
             transition: background-color 0.3s, color 0.3s;
             position: relative;
         }
+
         body::before {
             content: "";
             position: fixed;
@@ -64,6 +67,7 @@
             z-index: 0;
             pointer-events: none;
         }
+
         body::after {
             content: "";
             position: fixed;
@@ -75,17 +79,25 @@
             z-index: 0;
             pointer-events: none;
         }
-        .container { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
 
-        /* ========== HEADER ========== */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
         .header {
             text-align: center;
             margin-bottom: 2rem;
         }
+
         .header h1 {
             font-size: 2.8rem;
             font-weight: 700;
             color: var(--text);
+            margin-bottom: 0.5rem;
             letter-spacing: -0.5px;
             background: var(--glass-bg);
             backdrop-filter: blur(12px);
@@ -96,6 +108,7 @@
             border: 1px solid var(--glass-border);
             box-shadow: var(--glass-shadow);
         }
+
         .header .subtitle {
             font-size: 1.1rem;
             color: var(--text-secondary);
@@ -103,43 +116,89 @@
             margin-top: 0.5rem;
         }
 
-        /* ========== TOOLBAR ========== */
-        .toolbar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 2rem;
-        }
-        .toolbar button {
-            font-family: 'Inter', sans-serif;
+        .header .badge {
+            display: inline-block;
+            margin-top: 0.75rem;
             background: var(--glass-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: var(--text);
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid var(--glass-border);
+        }
+
+        /* Dark Mode Toggle */
+        .theme-toggle-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .theme-toggle {
+            background: var(--toggle-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--glass-border);
             border-radius: 50px;
-            padding: 10px 22px;
-            color: var(--text);
-            font-size: .9rem;
-            font-weight: 500;
+            padding: 8px 20px;
             cursor: pointer;
-            transition: all .25s ease;
-            display: inline-flex;
+            font-size: 1.2rem;
+            color: var(--text);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .theme-toggle:hover {
+            background: var(--card-hover-bg);
+            transform: scale(1.05);
+        }
+
+        .theme-toggle i {
+            transition: transform 0.3s ease;
+        }
+
+        /* Nút mở Modal tùy chỉnh */
+        .customize-btn-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: -0.5rem 0 1.5rem;
+        }
+
+        .customize-btn {
+            background: var(--toggle-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 8px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--text);
+            transition: all 0.3s ease;
+            display: flex;
             align-items: center;
             gap: 8px;
             box-shadow: var(--glass-shadow);
         }
-        .toolbar button:hover {
+
+        .customize-btn:hover {
             background: var(--card-hover-bg);
-            transform: translateY(-2px);
+            transform: scale(1.05);
         }
 
-        /* ========== DEMO GRID ========== */
+        /* Demo Grid */
         .demo-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 24px;
         }
+
         .demo-card {
             background: var(--card-bg);
             backdrop-filter: blur(16px);
@@ -154,12 +213,14 @@
             display: flex;
             flex-direction: column;
         }
+
         .demo-card:hover {
             transform: translateY(-8px);
             background: var(--card-hover-bg);
             box-shadow: 0 20px 48px rgba(0,0,0,0.12);
             border-color: var(--accent-light);
         }
+
         .card-preview {
             height: 180px;
             display: flex;
@@ -170,15 +231,19 @@
             overflow: hidden;
             background: linear-gradient(135deg, var(--glass-bg), var(--card-bg));
             border-bottom: 1px solid var(--glass-border);
+            color: var(--text);
         }
+
         .card-preview .icon {
             position: relative;
             z-index: 1;
             transition: transform 0.3s ease;
         }
+
         .demo-card:hover .icon {
             transform: scale(1.15) rotate(-8deg);
         }
+
         .card-body {
             padding: 1.5rem;
             flex: 1;
@@ -186,17 +251,39 @@
             flex-direction: column;
             gap: 8px;
         }
+
         .card-body .demo-title {
             font-size: 1.3rem;
             font-weight: 600;
         }
+
         .card-body .demo-desc {
             font-size: 0.9rem;
             color: var(--text-secondary);
             line-height: 1.5;
         }
 
-        /* ========== FOOTER ========== */
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: var(--tag-bg);
+            color: var(--tag-color);
+        }
+
+        .tag.html { background: rgba(239,68,68,0.15); color: #ef4444; }
+        .tag.css  { background: rgba(59,130,246,0.15); color: #3b82f6; }
+        .tag.js   { background: rgba(234,179,8,0.15); color: #eab308; }
+
+        /* Footer */
         .footer {
             text-align: center;
             margin-top: 3rem;
@@ -207,16 +294,20 @@
             -webkit-backdrop-filter: blur(12px);
             padding: 1rem;
             border-radius: 60px;
+            display: inline-block;
+            width: 100%;
             border: 1px solid var(--glass-border);
         }
+
         .footer a {
             color: var(--accent);
             text-decoration: none;
             font-weight: 500;
         }
+
         .footer a:hover { text-decoration: underline; }
 
-        /* ========== MODAL ========== */
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -228,7 +319,9 @@
             align-items: center;
             justify-content: center;
         }
+
         .modal.open { display: flex; }
+
         .modal-content {
             background: var(--card-bg);
             backdrop-filter: blur(20px);
@@ -236,38 +329,48 @@
             border: 1px solid var(--glass-border);
             border-radius: 28px;
             padding: 2rem;
-            max-width: 580px;
+            max-width: 600px;
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
             box-shadow: 0 20px 60px rgba(0,0,0,0.2);
             position: relative;
         }
+
         .modal-content h2 { margin-top: 0; }
+
         .close {
             position: absolute;
-            right: 1.5rem; top: 1rem;
+            right: 1.5rem;
+            top: 1rem;
             font-size: 2rem;
             cursor: pointer;
             color: var(--text-secondary);
         }
+
         .close:hover { color: var(--text); }
+
         .section { margin-top: 1.5rem; }
+
         .section h3 { margin-bottom: 0.75rem; }
+
         .color-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            gap: 12px;
         }
+
         .color-swatch {
             width: 100%;
             aspect-ratio: 1;
-            border-radius: 14px;
+            border-radius: 16px;
             cursor: pointer;
             border: 2px solid transparent;
             transition: 0.2s;
         }
+
         .color-swatch:hover { transform: scale(1.1); border-color: var(--accent); }
+
         .btn-apply {
             background: var(--glass-bg);
             backdrop-filter: blur(8px);
@@ -280,11 +383,10 @@
             margin-right: 8px;
             margin-top: 8px;
             transition: 0.2s;
-            font-family: 'Inter', sans-serif;
         }
+
         .btn-apply:hover { background: var(--card-hover-bg); }
 
-        /* ========== RESPONSIVE ========== */
         @media (max-width: 600px) {
             body { padding: 1.5rem 1rem; }
             .header h1 { font-size: 1.8rem; }
@@ -297,32 +399,60 @@
 <div class="container">
     <!-- Header -->
     <div class="header">
-        <h1>🎨 Những Demo Thiết Kế Frontend</h1>
+        <h1>Những Demo Thiết Kế Frontend</h1>
         <p class="subtitle">Bộ sưu tập các giao diện được xây dựng bằng HTML, CSS và JavaScript thuần.</p>
+        <span class="badge">Open Source · MIT License</span>
     </div>
 
-    <!-- Toolbar -->
-    <div class="toolbar">
-        <button onclick="toggleTheme()" id="themeToggle">
-            <i class="fas fa-moon" id="themeIcon"></i> <span id="themeLabel">Dark Mode</span>
+    <!-- Dark Mode Toggle -->
+    <div class="theme-toggle-wrapper">
+        <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">
+            <i class="fas fa-moon" id="themeIcon"></i>
+            <span id="themeLabel">Dark Mode</span>
         </button>
-        <button onclick="openCustomizeModal()">
+    </div>
+
+    <!-- Nút mở Modal tùy chỉnh -->
+    <div class="customize-btn-wrapper">
+        <button class="customize-btn" onclick="openCustomizeModal()">
             <i class="fas fa-palette"></i> Tùy chỉnh giao diện
         </button>
     </div>
 
     <!-- Demo Grid -->
     <div class="demo-grid">
+        <!-- Demo: Liquid Glass -->
         <a href="assets/glass/" class="demo-card">
             <div class="card-preview">
-                <span class="icon">🧊</span>
+                <span class="icon">🪟</span>
             </div>
             <div class="card-body">
                 <div class="demo-title">Liquid Glass</div>
-                <div class="demo-desc">Bộ sưu tập 10 thành phần giao diện kính lỏng với hiệu ứng biến dạng động.</div>
+                <div class="demo-desc">Bộ sưu tập 10 thành phần kính lỏng: Nav, Search, Card, Button, Toggle, Spinner, Dropdown, Form, Sidebar, Icons.</div>
+                <div class="card-tags">
+                    <span class="tag html">HTML</span>
+                    <span class="tag css">CSS</span>
+                    <span class="tag js">JavaScript</span>
+                </div>
             </div>
         </a>
-        <!-- Có thể thêm demo mới ở đây -->
+
+        <!-- Demo: Tri Kỷ (liên kết tới triky.pythonanywhere.com) -->
+        <a href="https://triky.pythonanywhere.com/" target="_blank" class="demo-card">
+            <div class="card-preview">
+                <span class="icon">🌿</span>
+            </div>
+            <div class="card-body">
+                <div class="demo-title">Tri Kỷ · Healing Space</div>
+                <div class="demo-desc">Không gian blog chữa lành với Flask, SQLite, Glassmorphism. Đầy đủ chức năng đăng bài, bình luận, like, bookmark.</div>
+                <div class="card-tags">
+                    <span class="tag html">HTML</span>
+                    <span class="tag css">CSS</span>
+                    <span class="tag js">JavaScript</span>
+                    <span class="tag" style="background:rgba(34,197,94,0.15);color:#22c55e;">Python</span>
+                </div>
+            </div>
+        </a>
     </div>
 
     <!-- Footer -->
@@ -331,11 +461,11 @@
     </div>
 </div>
 
-<!-- Modal Tùy chỉnh nền -->
+<!-- Modal Tùy chỉnh giao diện -->
 <div class="modal" id="customizeModal">
     <div class="modal-content">
         <span class="close" onclick="closeCustomizeModal()">&times;</span>
-        <h2>🎨 Tùy chỉnh giao diện</h2>
+        <h2>Tùy chỉnh giao diện</h2>
         <div class="section">
             <h3>Màu nền có sẵn</h3>
             <div class="color-grid" id="colorGrid"></div>
@@ -343,15 +473,14 @@
         <div class="section">
             <h3>Hoặc tải ảnh lên</h3>
             <input type="file" id="bgImageInput" accept="image/*" style="display:none">
-            <button class="btn-apply" onclick="document.getElementById('bgImageInput').click()">📁 Chọn ảnh</button>
-            <button class="btn-apply" onclick="resetBackground()">🔄 Đặt lại mặc định</button>
+            <button class="btn-apply" onclick="document.getElementById('bgImageInput').click()">Chọn ảnh</button>
+            <button class="btn-apply" id="resetBgBtn" onclick="resetBackground()">Đặt lại mặc định</button>
         </div>
     </div>
 </div>
 
 <script>
-(function() {
-    // ==================== DARK MODE ====================
+    // Dark mode logic
     const html = document.documentElement;
     const themeIcon = document.getElementById('themeIcon');
     const themeLabel = document.getElementById('themeLabel');
@@ -368,15 +497,15 @@
         localStorage.setItem('theme', mode);
     }
 
-    window.toggleTheme = function() {
+    function toggleTheme() {
         const current = html.getAttribute('data-theme');
         setTheme(current === 'dark' ? 'light' : 'dark');
-    };
+    }
 
     const saved = localStorage.getItem('theme') || 'light';
     setTheme(saved);
 
-    // ==================== BACKGROUND CUSTOMIZATION ====================
+    // Background customization logic
     const bgSettings = JSON.parse(localStorage.getItem('bgSettings')) || {};
 
     function applyBackground() {
@@ -391,23 +520,25 @@
             document.body.style.backgroundColor = '';
         } else {
             document.body.style.backgroundImage = '';
+            document.body.style.backgroundSize = '';
             document.body.style.backgroundColor = '';
         }
     }
 
     const colorPresets = [
-        { name: 'Hồng pastel', value: 'radial-gradient(ellipse at 30% 20%, #f7c5c5 0%, #f0a8b8 30%, #e8b4c8 55%, #ddb8d8 80%, #cfc4e8 100%)' },
-        { name: 'Xanh dương', value: 'radial-gradient(ellipse at 30% 20%, #b8d8f8 0%, #8abce8 30%, #98c0e8 55%, #b0c8f0 80%, #c4d8f8 100%)' },
-        { name: 'Tím mộng mơ', value: 'radial-gradient(ellipse at 30% 20%, #d4b8f0 0%, #b28df0 30%, #c4a8f0 55%, #d8c8f8 80%, #e8d8f8 100%)' },
-        { name: 'Xanh lá', value: 'radial-gradient(ellipse at 30% 20%, #b8f0d4 0%, #7ed8a0 30%, #98e8b8 55%, #b0f0c8 80%, #c8f8d8 100%)' },
-        { name: 'Cam hoàng hôn', value: 'radial-gradient(ellipse at 30% 20%, #f0c898 0%, #e8a878 30%, #f0c0a0 55%, #f8d8c0 80%, #f8e8d8 100%)' },
-        { name: 'Xám trung tính', value: 'radial-gradient(ellipse at 30% 20%, #d0d0d0 0%, #a8a8a8 30%, #b0b0b0 55%, #c8c8c8 80%, #d8d8d8 100%)' },
-        { name: 'Đen huyền', value: '#1a1a1a' },
-        { name: 'Trắng tinh', value: '#ffffff' }
+        {name:'Hồng pastel', value:'radial-gradient(ellipse at 30% 20%, #f7c5c5 0%, #f0a8b8 30%, #e8b4c8 55%, #ddb8d8 80%, #cfc4e8 100%)'},
+        {name:'Xanh dương', value:'radial-gradient(ellipse at 30% 20%, #b8d8f8 0%, #8abce8 30%, #98c0e8 55%, #b0c8f0 80%, #c4d8f8 100%)'},
+        {name:'Tím mộng mơ', value:'radial-gradient(ellipse at 30% 20%, #d4b8f0 0%, #b28df0 30%, #c4a8f0 55%, #d8c8f8 80%, #e8d8f8 100%)'},
+        {name:'Xanh lá', value:'radial-gradient(ellipse at 30% 20%, #b8f0d4 0%, #7ed8a0 30%, #98e8b8 55%, #b0f0c8 80%, #c8f8d8 100%)'},
+        {name:'Cam hoàng hôn', value:'radial-gradient(ellipse at 30% 20%, #f0c898 0%, #e8a878 30%, #f0c0a0 55%, #f8d8c0 80%, #f8e8d8 100%)'},
+        {name:'Xám trung tính', value:'radial-gradient(ellipse at 30% 20%, #d0d0d0 0%, #a8a8a8 30%, #b0b0b0 55%, #c8c8c8 80%, #d8d8d8 100%)'},
+        {name:'Đen huyền', value:'#1a1a1a'},
+        {name:'Trắng tinh', value:'#ffffff'}
     ];
 
     function renderColorGrid() {
         const grid = document.getElementById('colorGrid');
+        grid.innerHTML = '';
         colorPresets.forEach(c => {
             const swatch = document.createElement('div');
             swatch.className = 'color-swatch';
@@ -438,27 +569,29 @@
         reader.readAsDataURL(file);
     });
 
-    window.resetBackground = function() {
+    function resetBackground() {
         localStorage.removeItem('bgSettings');
         bgSettings.type = null;
         bgSettings.value = null;
         applyBackground();
         closeCustomizeModal();
-    };
+    }
 
-    window.openCustomizeModal = function() {
+    function openCustomizeModal() {
         document.getElementById('customizeModal').classList.add('open');
-    };
-    window.closeCustomizeModal = function() {
+    }
+
+    function closeCustomizeModal() {
         document.getElementById('customizeModal').classList.remove('open');
-    };
+    }
+
     document.getElementById('customizeModal').addEventListener('click', function(e) {
         if (e.target === this) closeCustomizeModal();
     });
 
     renderColorGrid();
     applyBackground();
-})();
 </script>
+
 </body>
 </html>
