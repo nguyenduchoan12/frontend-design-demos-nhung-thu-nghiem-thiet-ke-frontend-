@@ -1,731 +1,924 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi" data-theme="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Kree8 Studio · 创意工具面板</title>
-    <!-- Google Fonts + Font Awesome -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Glass · Bộ sưu tập giao diện kính lỏng</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* ========== BIẾN TOÀN CỤC ========== */
+        :root {
+            --bg: #0a0a0a;
+            --bg-secondary: #111111;
+            --text: #ffffff;
+            --text-secondary: rgba(255,255,255,0.7);
+            --accent: #ffffff;
+            --accent-light: rgba(255,255,255,0.8);
+            --glass-bg: rgba(255,255,255,0.08);
+            --glass-border: rgba(255,255,255,0.12);
+            --glass-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            --card-bg: rgba(20,20,20,0.6);
+            --card-hover-bg: rgba(30,30,30,0.8);
+            --wallpaper: radial-gradient(ellipse at 30% 20%, #1a1a2e 0%, #0f0f1a 40%, #0a0a0f 80%, #050510 100%);
+        }
+        [data-theme="light"] {
+            --bg: #e8ecf1;
+            --bg-secondary: #f4f6fb;
+            --text: #1a1a2e;
+            --text-secondary: rgba(0,0,0,0.6);
+            --accent: #1a1a2e;
+            --accent-light: rgba(0,0,0,0.7);
+            --glass-bg: rgba(255,255,255,0.35);
+            --glass-border: rgba(255,255,255,0.5);
+            --glass-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            --card-bg: rgba(255,255,255,0.4);
+            --card-hover-bg: rgba(255,255,255,0.6);
+            --wallpaper: radial-gradient(ellipse at 30% 20%, #dce3f0 0%, #e8ecf1 40%, #f0f3f8 80%, #d8dde8 100%);
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{
+            font-family:'Inter',system-ui,sans-serif;
+            background:var(--bg);
+            color:var(--text);
+            min-height:100vh;
+            padding:2rem;
+            transition:background .4s,color .4s;
+            position:relative;
+            overflow-x:hidden;
+        }
+        body::before{
+            content:"";position:fixed;inset:0;
+            background:var(--wallpaper);
+            z-index:-1;pointer-events:none;
+        }
+        body::after{
+            content:"";position:fixed;
+            top:-120px;left:-120px;
+            width:500px;height:500px;
+            background:radial-gradient(circle,rgba(120,140,255,.12) 0%,transparent 70%);
+            border-radius:50%;z-index:-1;pointer-events:none;
         }
 
-        body {
-            background: #f4f6fb;
-            font-family: 'Inter', sans-serif;
-            padding: 2rem;
-            color: #1e293b;
+        .container{max-width:1300px;margin:0 auto;position:relative;z-index:1}
+
+        /* ========== BACK LINK ========== */
+        .back-link{
+            display:inline-flex;align-items:center;gap:8px;
+            color:var(--text);text-decoration:none;
+            font-weight:500;font-size:.9rem;
+            background:var(--glass-bg);backdrop-filter:blur(12px);
+            -webkit-backdrop-filter:blur(12px);
+            padding:10px 20px;border-radius:40px;
+            border:1px solid var(--glass-border);
+            box-shadow:var(--glass-shadow);
+            transition:all .25s ease;margin-bottom:1.5rem;
+        }
+        .back-link:hover{background:var(--card-hover-bg);transform:translateY(-2px)}
+
+        /* ========== HEADER ========== */
+        .header{
+            text-align:center;margin-bottom:2.5rem;
+        }
+        .header h1{
+            font-size:2.8rem;font-weight:700;
+            letter-spacing:-0.5px;
+            background:var(--glass-bg);backdrop-filter:blur(20px);
+            -webkit-backdrop-filter:blur(20px);
+            display:inline-block;padding:.6rem 2.5rem;
+            border-radius:60px;border:1px solid var(--glass-border);
+            box-shadow:var(--glass-shadow);
+        }
+        .header .subtitle{
+            font-size:1.1rem;color:var(--text-secondary);
+            margin-top:.6rem;
         }
 
-        /* 主容器 - 类似设计系统 / 两块可复用布局 */
-        .dashboard {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 360px;
-            gap: 28px;
-            align-items: start;
+        /* ========== TOOLBAR (Theme + Background) ========== */
+        .toolbar{
+            display:flex;flex-wrap:wrap;gap:10px;
+            justify-content:center;margin-bottom:2rem;
+        }
+        .toolbar button{
+            font-family:'Inter',sans-serif;
+            background:var(--glass-bg);backdrop-filter:blur(12px);
+            -webkit-backdrop-filter:blur(12px);
+            border:1px solid var(--glass-border);
+            border-radius:50px;padding:10px 22px;
+            color:var(--text);font-size:.9rem;
+            font-weight:500;cursor:pointer;
+            transition:all .25s ease;
+            display:inline-flex;align-items:center;gap:8px;
+            box-shadow:var(--glass-shadow);
+        }
+        .toolbar button:hover{
+            background:var(--card-hover-bg);
+            transform:translateY(-2px);
         }
 
-        /* 通用卡片样式 —— 可复用组件 */
-        .card {
-            background: #ffffff;
-            border-radius: 28px;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.02);
-            transition: all 0.2s ease;
-            padding: 1.5rem;
+        /* ========== SECTION TITLE ========== */
+        .section-title{
+            font-size:1.5rem;font-weight:600;
+            margin:2.5rem 0 1.25rem;
+            display:flex;align-items:center;gap:10px;
+        }
+        .section-title::after{
+            content:"";flex:1;height:1px;
+            background:var(--glass-border);
         }
 
-        .card + .card {
-            margin-top: 24px;
+        /* ========== COMPONENT GRID ========== */
+        .comp-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            gap:24px;
+        }
+        .comp-cell{
+            background:var(--card-bg);backdrop-filter:blur(16px);
+            -webkit-backdrop-filter:blur(16px);
+            border:1px solid var(--glass-border);
+            border-radius:24px;padding:2rem;
+            box-shadow:var(--glass-shadow);
+            display:flex;flex-direction:column;
+            align-items:center;justify-content:center;
+            gap:1rem;min-height:200px;
+            transition:all .35s ease;
+        }
+        .comp-cell:hover{
+            background:var(--card-hover-bg);
+            transform:translateY(-3px);
+        }
+        .comp-cell .label{
+            font-size:.75rem;font-weight:600;text-transform:uppercase;
+            letter-spacing:1px;color:var(--text-secondary);
+        }
+        .comp-cell.full-width{grid-column:1/-1}
+
+        /* ========== LIQUID GLASS CORE ========== */
+        .glass-filter,.glass-overlay,.glass-specular{
+            position:absolute;inset:0;border-radius:inherit;
+        }
+        .glass-filter{
+            z-index:1;backdrop-filter:blur(4px);
+            filter:url(#glass-distortion) saturate(120%) brightness(1.15);
+        }
+        .glass-overlay{z-index:2;background:var(--bg-color,rgba(255,255,255,.25))}
+        .glass-specular{z-index:3;box-shadow:inset 1px 1px 1px var(--highlight,rgba(255,255,255,.75))}
+        .glass-content{position:relative;z-index:4}
+
+        /* ========== CARD CRD004 ========== */
+        .glass-card{
+            --bg-color:rgba(255,255,255,.25);--highlight:rgba(255,255,255,.75);
+            position:relative;width:260px;height:180px;
+            border-radius:20px;overflow:hidden;
+            box-shadow:0 6px 24px rgba(0,0,0,.2);
+        }
+        .glass-card .glass-content{
+            padding:20px;color:#fff;text-align:center;
+            display:flex;flex-direction:column;justify-content:center;
+            align-items:center;height:100%;
+        }
+        .glass-card .glass-content h3{margin:0 0 8px;font-size:22px;font-weight:600}
+        .glass-card .glass-content p{margin:0;opacity:.8;font-size:.9rem}
+
+        /* ========== BUTTON BTN003 ========== */
+        .glass-button{
+            --bg-color:rgba(255,255,255,.25);--highlight:rgba(255,255,255,.75);
+            position:relative;padding:12px 28px;border:none;
+            border-radius:12px;cursor:pointer;overflow:hidden;
+            background:transparent;transition:transform .2s ease;
+            outline:none;font-family:'Inter',sans-serif;font-size:16px;
+        }
+        .glass-button:hover{transform:scale(1.05)}
+        .glass-button:active{transform:scale(.95)}
+        .glass-button .glass-content{color:#fff;font-weight:500}
+
+        /* ========== ICONS ICO001 ========== */
+        .glass-icons-grid{
+            display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
+        }
+        .glass-icon{
+            --bg-color:rgba(255,255,255,.25);--highlight:rgba(255,255,255,.75);
+            position:relative;width:56px;height:56px;
+            border-radius:14px;overflow:hidden;
+            background:transparent;cursor:pointer;
+            transition:transform .2s ease;
+        }
+        .glass-icon:hover{transform:scale(1.1)}
+        .glass-icon .glass-content{
+            width:100%;height:100%;display:flex;
+            justify-content:center;align-items:center;color:#fff;font-size:22px;
         }
 
-        /* 左侧区域 */
-        .left-panel {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
+        /* ========== TOGGLE TGL001 ========== */
+        .glass-toggle-group{display:flex;flex-direction:column;gap:16px;min-width:200px}
+        .glass-toggle{
+            --bg-color:rgba(255,255,255,.25);--highlight:rgba(255,255,255,.75);
+            --track-width:56px;--track-height:30px;--thumb-size:22px;
+            display:flex;align-items:center;gap:12px;cursor:pointer;
+        }
+        .toggle-input{position:absolute;opacity:0;pointer-events:none}
+        .toggle-track{
+            position:relative;width:var(--track-width);
+            height:var(--track-height);border-radius:15px;overflow:hidden;
+        }
+        .toggle-thumb{
+            position:absolute;z-index:4;top:4px;left:4px;
+            width:var(--thumb-size);height:var(--thumb-size);
+            border-radius:50%;transition:transform .3s ease;overflow:hidden;
+        }
+        .toggle-thumb .glass-overlay{background:rgba(255,255,255,.9)}
+        .toggle-label{color:var(--text);font-size:15px;user-select:none;font-weight:500}
+        .toggle-input:checked+.toggle-track .toggle-thumb{
+            transform:translateX(calc(var(--track-width) - var(--thumb-size) - 8px));
+        }
+        .toggle-input:checked+.toggle-track .glass-overlay{
+            background:rgba(255,255,255,.4);
         }
 
-        /* 格式化工具栏卡片 (对应 IMG_2215 + 部分 IMG_2212 控件) */
-        .toolbar-card {
-            padding: 1.4rem 1.6rem;
+        /* ========== SPINNER LDR003 ========== */
+        .glass-spinner{
+            --bg-color:rgba(255,255,255,.25);--highlight:rgba(255,255,255,.75);
+            position:relative;width:72px;height:72px;
+            border-radius:50%;overflow:hidden;background:transparent;
+        }
+        .spinner-ring{
+            position:absolute;width:56px;height:56px;
+            border:2px solid transparent;
+            border-top-color:rgba(255,255,255,.8);
+            border-right-color:rgba(255,255,255,.6);
+            border-radius:50%;
+            animation:spin 1s linear infinite;
+            top:8px;left:8px;
+        }
+        .spinner-core{
+            width:20px;height:20px;
+            background:rgba(255,255,255,.9);
+            border-radius:50%;
+            animation:pulse 1s ease-in-out infinite alternate;
+        }
+        @keyframes spin{to{transform:rotate(360deg)}}
+        @keyframes pulse{from{transform:scale(.8);opacity:.5}to{transform:scale(1);opacity:.8}}
+
+        /* ========== DROPDOWN DRP001 ========== */
+        .glass-dropdown-list{
+            --bg-color:rgba(255,255,255,.25);--highlight:rgba(255,255,255,.75);
+            display:flex;flex-direction:column;gap:12px;width:100%;max-width:400px;
+        }
+        .glass-dropdown{position:relative}
+        .dropdown-toggle{position:absolute;opacity:0;pointer-events:none}
+        .dropdown-header{
+            position:relative;display:block;border-radius:12px;
+            overflow:hidden;cursor:pointer;
+        }
+        .dropdown-header .glass-content{
+            padding:16px;color:#fff;display:flex;
+            justify-content:space-between;align-items:center;
+        }
+        .dropdown-arrow{width:18px;height:18px;transition:transform .3s ease}
+        .dropdown-content{
+            position:relative;overflow:hidden;max-height:0;
+            transition:max-height .3s ease;border-radius:12px;margin-top:6px;
+        }
+        .dropdown-content .glass-content{
+            padding:0 16px;opacity:0;
+            transform:translateY(-10px);transition:all .3s ease;
+            color:#fff;
+        }
+        .dropdown-toggle:checked~.dropdown-header .dropdown-arrow{transform:rotate(180deg)}
+        .dropdown-toggle:checked~.dropdown-content{max-height:200px}
+        .dropdown-toggle:checked~.dropdown-content .glass-content{
+            padding:16px;opacity:1;transform:translateY(0);
+        }
+        .dropdown-content ul{list-style:none;margin:0;padding:0}
+        .dropdown-content li{margin:8px 0;font-size:.9rem}
+
+        /* ========== SEARCH SRH002 ========== */
+        .glass-search{
+            --bg-color:rgba(255,255,255,.25);--highlight:rgba(255,255,255,.75);
+            --input-bg:rgba(255,255,255,.1);--input-border:rgba(255,255,255,.2);
+            --input-focus:rgba(255,255,255,.3);
+            position:relative;width:100%;max-width:450px;
+            border-radius:20px;overflow:hidden;
+            box-shadow:0 6px 24px rgba(0,0,0,.2);
+        }
+        .search-container{
+            position:relative;padding:20px;display:flex;align-items:center;
+            transition:padding .4s cubic-bezier(.4,0,.2,1);
+        }
+        .search-icon-pos{
+            position:absolute;left:35px;font-size:16px;
+            color:var(--text);opacity:.8;pointer-events:none;
+            z-index:10;transition:all .4s cubic-bezier(.4,0,.2,1);
+        }
+        .search-input{
+            width:100%;padding:12px 40px;
+            background:var(--input-bg);
+            border:1px solid var(--input-border);
+            border-radius:12px;color:#fff;font-size:15px;
+            transition:all .4s cubic-bezier(.4,0,.2,1);
+            font-family:'Inter',sans-serif;
+        }
+        .search-input:focus{
+            outline:none;background:var(--input-focus);
+            border-color:var(--highlight);
+            transform:translateY(-2px);
+            box-shadow:0 8px 16px rgba(0,0,0,.1);
+        }
+        .search-input::placeholder{color:rgba(255,255,255,.5)}
+        .search-suggestions{
+            padding:0 20px 20px;max-height:0;opacity:0;
+            overflow:hidden;transform:translateY(-10px);
+            transition:all .5s cubic-bezier(.4,0,.2,1);
+            pointer-events:none;color:#fff;
+        }
+        .search-suggestions.active{max-height:300px;opacity:1;transform:translateY(0);pointer-events:auto}
+        .search-suggestions h4{font-size:13px;margin:0 0 8px;opacity:.7;font-weight:500}
+        .search-suggestions ul{list-style:none;padding:0;margin:0}
+        .search-suggestions li{
+            padding:8px 12px;border-radius:8px;cursor:pointer;
+            display:flex;align-items:center;gap:10px;
+            transition:all .3s cubic-bezier(.4,0,.2,1);
+            font-size:.9rem;
+        }
+        .search-suggestions li:hover{background:rgba(255,255,255,.1)}
+
+        /* ========== FORM FRM001 ========== */
+        .glass-form{
+            --bg-color:rgba(255,255,255,.25);--highlight:rgba(255,255,255,.75);
+            --input-bg:rgba(255,255,255,.1);--input-border:rgba(255,255,255,.2);
+            --input-focus:rgba(255,255,255,.3);
+            position:relative;width:100%;max-width:380px;
+            min-height:420px;border-radius:20px;overflow:hidden;
+            box-shadow:0 6px 24px rgba(0,0,0,.2);
+        }
+        .glass-form .glass-content{padding:30px;color:#fff;height:100%}
+        .form-container{display:none;opacity:0;transform:translateX(20px);transition:opacity .3s,transform .3s}
+        .form-container.active{display:block;opacity:1;transform:translateX(0)}
+        .form-container h3{margin:0 0 18px;font-size:26px;font-weight:600;text-align:center}
+        .form-group{position:relative;margin-bottom:16px}
+        .form-group i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#fff;opacity:.8;z-index:5}
+        .form-group input{
+            width:100%;padding:12px 14px 12px 42px;
+            background:var(--input-bg);border:1px solid var(--input-border);
+            border-radius:10px;color:#fff;font-size:15px;
+            transition:border-color .3s,background .3s;font-family:'Inter',sans-serif;
+        }
+        .form-group input:focus{outline:none;background:var(--input-focus);border-color:var(--highlight)}
+        .form-group input::placeholder{color:rgba(255,255,255,.5)}
+        .form-submit{
+            width:100%;padding:12px;
+            background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);
+            border-radius:10px;color:#fff;font-size:15px;font-weight:600;
+            cursor:pointer;transition:all .3s;margin-top:6px;
+            font-family:'Inter',sans-serif;
+        }
+        .form-submit:hover{background:rgba(255,255,255,.3);border-color:rgba(255,255,255,.4)}
+        .form-switch{text-align:center;margin-top:16px;font-size:13px;opacity:.8}
+        .form-switch a{color:#fff;text-decoration:none;font-weight:600}
+        .form-switch a:hover{text-decoration:underline}
+
+        /* ========== NAV NAV002 ========== */
+        .glass-nav{
+            --bg-color:rgba(255,255,255,.25);--highlight:rgba(255,255,255,.75);
+            position:relative;width:100%;max-width:600px;
+            border-radius:12px;overflow:hidden;background:transparent;
+        }
+        .glass-nav .glass-content{padding:14px 20px}
+        .nav-list{
+            list-style:none;margin:0;padding:0;
+            display:flex;justify-content:center;gap:16px;flex-wrap:wrap;
+        }
+        .nav-item{
+            color:#fff;text-decoration:none;font-weight:500;
+            font-size:15px;padding:8px 16px;border-radius:8px;
+            transition:background-color .2s;
+        }
+        .nav-item:hover,.nav-item.active{background-color:rgba(255,255,255,.15)}
+
+        /* ========== SIDEBAR SBR001 ========== */
+        .glass-sidebar{
+            --bg-color:rgba(255,255,255,.25);--highlight:rgba(255,255,255,.75);
+            position:relative;width:100%;max-width:260px;
+            height:380px;border-radius:20px;overflow:hidden;
+            box-shadow:0 6px 24px rgba(0,0,0,.2);
+        }
+        .glass-sidebar .glass-content{color:#fff;height:100%;display:flex;flex-direction:column}
+        .sidebar-header{padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.1)}
+        .sidebar-header h3{margin:0;font-size:22px;font-weight:600}
+        .sidebar-nav{padding:16px 0;flex:1}
+        .sidebar-nav .nav-item{
+            display:flex;align-items:center;padding:12px 20px;
+            color:#fff;text-decoration:none;gap:12px;
+            transition:all .4s cubic-bezier(.4,0,.2,1);
+        }
+        .sidebar-nav .nav-item:hover,.sidebar-nav .nav-item.active{
+            background:rgba(255,255,255,.1);
+        }
+        .sidebar-nav .nav-item i{font-size:16px;width:22px;text-align:center}
+
+        /* ========== MODAL ========== */
+        .modal{
+            display:none;position:fixed;z-index:1000;
+            left:0;top:0;width:100%;height:100%;
+            background:rgba(0,0,0,.5);backdrop-filter:blur(4px);
+            align-items:center;justify-content:center;
+        }
+        .modal.open{display:flex}
+        .modal-content{
+            background:var(--card-bg);backdrop-filter:blur(20px);
+            -webkit-backdrop-filter:blur(20px);
+            border:1px solid var(--glass-border);
+            border-radius:28px;padding:2rem;max-width:580px;
+            width:90%;max-height:80vh;overflow-y:auto;
+            box-shadow:0 20px 60px rgba(0,0,0,.3);position:relative;
+        }
+        .modal-content h2{margin-top:0;color:var(--text)}
+        .close{
+            position:absolute;right:1.5rem;top:1rem;
+            font-size:2rem;cursor:pointer;color:var(--text-secondary);
+        }
+        .close:hover{color:var(--text)}
+        .section{margin-top:1.5rem}
+        .section h3{margin-bottom:.75rem;color:var(--text)}
+        .color-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(56px,1fr));gap:10px}
+        .color-swatch{
+            width:100%;aspect-ratio:1;border-radius:14px;
+            cursor:pointer;border:2px solid transparent;transition:.2s;
+        }
+        .color-swatch:hover{transform:scale(1.1);border-color:var(--accent)}
+        .btn-apply{
+            background:var(--glass-bg);backdrop-filter:blur(8px);
+            border:1px solid var(--glass-border);padding:8px 16px;
+            border-radius:40px;cursor:pointer;font-size:.9rem;
+            color:var(--text);margin-right:8px;margin-top:8px;
+            transition:.2s;font-family:'Inter',sans-serif;
+        }
+        .btn-apply:hover{background:var(--card-hover-bg)}
+
+        /* ========== RESPONSIVE ========== */
+        @media(max-width:768px){
+            body{padding:1rem}
+            .header h1{font-size:1.8rem;padding:.5rem 1.5rem}
+            .comp-grid{grid-template-columns:1fr}
+            .glass-icons-grid{grid-template-columns:repeat(4,1fr)}
         }
 
-        .tool-group {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 20px;
-            row-gap: 16px;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid #eef2f8;
-            padding-bottom: 1rem;
+        /* ========== DISTORTION OVERLAY ========== */
+        .glass-distortion-overlay{
+            position:absolute;inset:0;
+            background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.05) 0%,transparent 80%),
+                       radial-gradient(circle at 80% 70%,rgba(255,255,255,.05) 0%,transparent 80%);
+            background-size:300% 300%;
+            animation:floatDistort 10s infinite ease-in-out;
+            mix-blend-mode:overlay;z-index:2;pointer-events:none;
         }
-
-        .tool-badge {
-            font-size: 13px;
-            font-weight: 600;
-            color: #3c4b64;
-            background: #f0f2f8;
-            padding: 4px 12px;
-            border-radius: 40px;
-            letter-spacing: 0.3px;
-        }
-
-        .btn-icon {
-            background: transparent;
-            border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 8px 14px;
-            font-size: 14px;
-            font-weight: 500;
-            font-family: 'Inter', sans-serif;
-            color: #1e293b;
-            cursor: pointer;
-            transition: 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: white;
-        }
-
-        .btn-icon i {
-            font-size: 15px;
-        }
-
-        .btn-icon:hover {
-            background: #f8fafc;
-            border-color: #cbd5e1;
-            transform: translateY(-1px);
-        }
-
-        .btn-primary {
-            background: #0f172a;
-            color: white;
-            border: none;
-            padding: 8px 18px;
-            border-radius: 40px;
-            font-weight: 500;
-        }
-
-        .btn-primary:hover {
-            background: #1e293b;
-        }
-
-        .size-control {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: #f8fafc;
-            padding: 5px 12px;
-            border-radius: 48px;
-            border: 1px solid #e2edf2;
-        }
-
-        .size-control span {
-            font-weight: 600;
-            font-size: 15px;
-            min-width: 40px;
-            text-align: center;
-        }
-
-        .size-btn {
-            background: white;
-            border: 1px solid #dce3ec;
-            border-radius: 30px;
-            width: 30px;
-            height: 30px;
-            font-weight: bold;
-            font-size: 18px;
-            cursor: pointer;
-            transition: 0.15s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .size-btn:hover {
-            background: #eef2ff;
-            border-color: #94a3b8;
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 8px;
-            background: #f8fafc;
-            padding: 4px 8px;
-            border-radius: 48px;
-            border: 1px solid #e2edf2;
-        }
-
-        .btn-style {
-            background: white;
-            border: none;
-            font-size: 16px;
-            font-weight: 500;
-            width: 34px;
-            height: 34px;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .btn-style.active {
-            background: #0f172a;
-            color: white;
-        }
-
-        .font-meta {
-            background: #f8fafc;
-            border-radius: 40px;
-            padding: 5px 16px;
-            font-size: 13px;
-            font-weight: 500;
-            color: #334155;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* 团队介绍卡片 (对应 IMG_2212 文本内容) */
-        .team-card p {
-            font-size: 1rem;
-            line-height: 1.5;
-            color: #1e2c3a;
-            transition: all 0.2s ease;
-        }
-
-        .highlight-team {
-            font-weight: 700;
-            color: #b45309;
-            background: linear-gradient(135deg, #fff1e6, #fff);
-            padding: 0 2px;
-            display: inline-block;
-        }
-
-        .preview-text {
-            margin: 0;
-        }
-
-        /* 右侧面板 — 对应 IMG_2213 & IMG_2214 */
-        .right-panel {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .contact-card {
-            padding: 1.5rem;
-        }
-
-        .askai-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .ask-badge {
-            background: #eef2ff;
-            border-radius: 40px;
-            padding: 5px 16px;
-            font-weight: 600;
-            font-size: 13px;
-            color: #1e3a8a;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: #f8fafc;
-            padding: 8px 14px;
-            border-radius: 60px;
-        }
-
-        .user-info span {
-            font-weight: 600;
-        }
-
-        .close-icon {
-            color: #94a3b8;
-            cursor: default;
-            font-size: 18px;
-        }
-
-        .action-row {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid #edf2f7;
-        }
-
-        .upload-btn, .call-btn {
-            background: #f1f5f9;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 40px;
-            font-size: 13px;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .upload-btn:hover, .call-btn:hover {
-            background: #e6edf4;
-        }
-
-        .filter-chip {
-            background: white;
-            border: 1px solid #dee4ed;
-            border-radius: 40px;
-            padding: 6px 14px;
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        .time-badge {
-            font-size: 13px;
-            color: #475569;
-            background: #f1f5f9;
-            padding: 6px 12px;
-            border-radius: 30px;
-        }
-
-        .status-row {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 20px;
-        }
-
-        .online-status {
-            background: #e6f7e6;
-            color: #15803d;
-            padding: 5px 12px;
-            border-radius: 40px;
-            font-size: 13px;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .progress-status {
-            background: #fff3e3;
-            color: #b45309;
-            padding: 5px 12px;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 13px;
-        }
-
-        .search-bar {
-            display: flex;
-            align-items: center;
-            background: #f8fafc;
-            border-radius: 60px;
-            padding: 8px 16px;
-            gap: 8px;
-            border: 1px solid #e2e8f0;
-            flex: 1;
-            min-width: 160px;
-        }
-
-        .search-bar i {
-            color: #7e8b9e;
-        }
-
-        .search-bar input {
-            border: none;
-            background: transparent;
-            outline: none;
-            font-size: 14px;
-            font-family: 'Inter', sans-serif;
-            width: 100%;
-        }
-
-        /* 状态徽章组 (Pending, Submitted, Success, Failed, Expired) IMG_2214 */
-        .status-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 8px;
-        }
-
-        .badge {
-            padding: 6px 16px;
-            border-radius: 100px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-            background: #f1f5f9;
-            color: #1e293b;
-        }
-
-        .badge-pending {
-            background: #fef9e3;
-            color: #b45309;
-        }
-
-        .badge-submitted {
-            background: #e0f2fe;
-            color: #0369a1;
-        }
-
-        .badge-success {
-            background: #e0f2e9;
-            color: #2b6e3c;
-        }
-
-        .badge-failed {
-            background: #ffe6e5;
-            color: #b91c1c;
-        }
-
-        .badge-expired {
-            background: #f1f3f4;
-            color: #4b5563;
-        }
-
-        hr {
-            margin: 12px 0;
-            border: 0;
-            height: 1px;
-            background: #ecf3fa;
-        }
-
-        /* 辅助文字 & 图标间距 */
-        i, .fas, .far {
-            pointer-events: none;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-bottom: 1.5rem;
-            color: #0f172a;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            background: white;
-            padding: 8px 16px;
-            border-radius: 40px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            transition: all 0.2s ease;
-        }
-        .back-link:hover {
-            background: #f1f5f9;
-            text-decoration: none;
-            transform: translateY(-1px);
-        }
-
-        @media (max-width: 860px) {
-            body {
-                padding: 1rem;
-            }
-            .dashboard {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            .right-panel {
-                order: 2;
-            }
-        }
-
-        /* 可重复使用的组件类 (方便集成到任意html) */
-        .k8-ask-badge, .k8-button, .k8-status-tag, .k8-text-preview {
-            /* 示例通用类 — 可移植 */
-        }
+        @keyframes floatDistort{0%{background-position:0% 0%}50%{background-position:100% 100%}100%{background-position:0% 0%}}
     </style>
 </head>
 <body>
 
-<a href="../../" class="back-link">← Quay lại</a>
+<!-- SVG Filter for Liquid Glass Distortion -->
+<svg style="display:none" aria-hidden="true">
+    <defs>
+        <filter id="glass-distortion" x="-50%" y="-50%" width="200%" height="200%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.03 0.04" numOctaves="4" seed="3" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="77" xChannelSelector="R" yChannelSelector="G" result="displaced"/>
+            <feGaussianBlur in="displaced" stdDeviation="0.3" result="blurred"/>
+            <feMerge><feMergeNode in="blurred"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+    </defs>
+</svg>
 
-<div class="dashboard">
-    <!-- 左侧区域: 格式工具 + 团队文本 (IMG_2215, IMG_2212) -->
-    <div class="left-panel">
-        <!-- 格式化卡片 (包含 Bold, 36+ B, 4px, B/I/U, Ask AI, Inter·Regular) -->
-        <div class="card toolbar-card">
-            <!-- 第一组: Bold + 字号控制器 + 边距控制器 (模拟 36 + B 和 4px) -->
-            <div class="tool-group">
-                <div class="tool-badge"><i class="fas fa-bold"></i> Bold · 粗体</div>
-                <div class="size-control">
-                    <button class="size-btn" id="decrementFont">−</button>
-                    <span id="currentFontSize">36</span>
-                    <button class="size-btn" id="incrementFont">+</button>
-                    <span style="font-weight:500; margin-left:4px;">px</span>
-                </div>
-                <button class="btn-icon" id="extraBoldBtn"><i class="fas fa-plus-circle"></i> +B</button>
-                <div class="size-control" style="gap:6px;">
-                    <span style="font-size:13px;">边距</span>
-                    <button class="size-btn" id="decrementMargin">−</button>
-                    <span id="currentMarginVal">4</span>
-                    <button class="size-btn" id="incrementMargin">+</button>
-                    <span style="font-size:12px;">px</span>
-                </div>
-            </div>
+<a href="../../" class="back-link"><i class="fas fa-arrow-left"></i> Quay lại danh sách demo</a>
 
-            <!-- 第二组: B I U 按钮群 -->
-            <div class="tool-group">
-                <div class="btn-group">
-                    <button class="btn-style" id="toggleBold" title="Bold (粗体)"><b>B</b></button>
-                    <button class="btn-style" id="toggleItalic" title="Italic"><i>I</i></button>
-                    <button class="btn-style" id="toggleUnderline" title="Underline"><u>U</u></button>
+<div class="container">
+    <!-- ========== HEADER ========== -->
+    <div class="header">
+        <h1>🧊 Bộ Sưu Tập Liquid Glass</h1>
+        <p class="subtitle">10 thành phần giao diện kính lỏng — hiệu ứng biến dạng, trong suốt và tương tác động</p>
+    </div>
+
+    <!-- ========== TOOLBAR ========== -->
+    <div class="toolbar">
+        <button onclick="toggleTheme()" id="themeToggleBtn">
+            <i class="fas fa-moon" id="themeIcon"></i> <span id="themeLabel">Chế độ Sáng</span>
+        </button>
+        <button onclick="openCustomizeModal()">
+            <i class="fas fa-palette"></i> Tùy chỉnh hình nền
+        </button>
+    </div>
+
+    <!-- ========== SECTION 1: ĐIỀU HƯỚNG & TÌM KIẾM ========== -->
+    <div class="section-title">🧭 Điều hướng &amp; Tìm kiếm</div>
+    <div class="comp-grid">
+        <div class="comp-cell">
+            <span class="label">NAV002 · Thanh điều hướng</span>
+            <div class="glass-nav">
+                <div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div>
+                <div class="glass-content">
+                    <ul class="nav-list">
+                        <li><a href="#" class="nav-item active">Trang chủ</a></li>
+                        <li><a href="#" class="nav-item">Giới thiệu</a></li>
+                        <li><a href="#" class="nav-item">Dịch vụ</a></li>
+                        <li><a href="#" class="nav-item">Liên hệ</a></li>
+                    </ul>
                 </div>
-                <div class="font-meta">
-                    <i class="fas fa-robot"></i> Ask AI
-                </div>
-                <div class="font-meta">
-                    <i class="fas fa-font"></i> Inter · Regular 14px
-                    <i class="fas fa-chevron-down" style="font-size: 10px; opacity:0.7;"></i>
-                </div>
-            </div>
-            <div style="font-size: 12px; color: #5b6e8c; margin-top: 4px;">
-                <i class="fas fa-sliders-h"></i> 实时调整下方文本样式
             </div>
         </div>
-
-        <!-- 团队介绍卡片 (IMG_2212 完整文案) -->
-        <div class="card team-card" id="teamCard">
-            <p class="preview-text" id="previewParagraph">
-                Kree8 is led by a <strong class="highlight-team">passionate team Satya</strong>, a brand strategist and creative mind, and Jay, a talented designer and developer. Together, we built Kree8 to deliver innovative design solutions tailored to each client's unique needs. Our vision is to help brands unlock their full potential through strategic, impactful, and visually stunning designs, while fostering long-lasting relationships built on trust and creativity.
-            </p>
+        <div class="comp-cell">
+            <span class="label">SRH002 · Thanh tìm kiếm</span>
+            <div class="glass-search">
+                <div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div>
+                <div class="glass-content">
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon-pos"></i>
+                        <input type="text" class="search-input" placeholder="Tìm kiếm thành phần...">
+                    </div>
+                    <div class="search-suggestions active">
+                        <h4>🔍 Tìm kiếm gần đây</h4>
+                        <ul>
+                            <li><i class="fas fa-clock"></i> Hiệu ứng kính lỏng</li>
+                            <li><i class="fas fa-clock"></i> Thiết kế giao diện hiện đại</li>
+                            <li><i class="fas fa-clock"></i> Hoạt ảnh CSS</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- 右侧区域: 用户动态 + 状态组 (IMG_2213 + IMG_2214) -->
-    <div class="right-panel">
-        <!-- 上部卡片: Ask AI / Ella M / Upload / Filter / 30min / Book a Call / Online / In progress / Search -->
-        <div class="card contact-card">
-            <!-- 第一行: Ask AI + Ella M. + 关闭 -->
-            <div class="askai-row">
-                <div class="ask-badge">
-                    <i class="fas fa-microphone-alt"></i> Ask AI
+    <!-- ========== SECTION 2: THẺ & NÚT ========== -->
+    <div class="section-title">🃏 Thẻ &amp; Nút</div>
+    <div class="comp-grid">
+        <div class="comp-cell">
+            <span class="label">CRD004 · Thẻ kính lỏng</span>
+            <div class="glass-card">
+                <div class="glass-filter"></div><div class="glass-distortion-overlay"></div>
+                <div class="glass-overlay"></div><div class="glass-specular"></div>
+                <div class="glass-content">
+                    <h3>Kính Lỏng</h3>
+                    <p>Hiệu ứng glassmorphism với biến dạng động</p>
                 </div>
-                <div class="user-info">
-                    <span>Ella M.</span>
-                    <i class="fas fa-times close-icon"></i>
-                </div>
-            </div>
-            <!-- 第二行: Upload / Filter·2 / 30 mins / Book a Call -->
-            <div class="action-row">
-                <button class="upload-btn"><i class="fas fa-upload"></i> Upload</button>
-                <div class="filter-chip"><i class="fas fa-filter"></i> Filter · 2</div>
-                <div class="time-badge"><i class="far fa-clock"></i> 30 mins</div>
-                <button class="call-btn"><i class="fas fa-phone-alt"></i> Book a Call</button>
-            </div>
-            <!-- 第三行: Online / In progress / Search -->
-            <div class="status-row">
-                <div class="online-status"><i class="fas fa-circle" style="font-size: 8px;"></i> Online</div>
-                <div class="progress-status"><i class="fas fa-spinner fa-pulse"></i> In progress</div>
-                <div class="search-bar">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search..." id="globalSearch">
-                </div>
-            </div>
-            <hr>
-            <!-- 底部状态标签: Pending, Submitted, Success, Failed, Expired 完全对应 IMG_2214 -->
-            <div class="status-badges">
-                <span class="badge badge-pending">Pending</span>
-                <span class="badge badge-submitted">Submitted</span>
-                <span class="badge badge-success">Success</span>
-                <span class="badge badge-failed">Failed</span>
-                <span class="badge badge-expired">Expired</span>
             </div>
         </div>
-        
-        <!-- 可选附加: 呼应整体设计干净利落, 也可以再加入简单占位信息, 完全符合4张图全部内容 -->
-        <div class="card" style="background: #ffffffd9;">
-            <div style="display: flex; align-items: center; gap: 14px; flex-wrap:wrap; justify-content: space-between;">
-                <div><i class="fas fa-chalkboard-user"></i> <strong>活动摘要</strong><span style="font-size:13px; margin-left: 8px;">今日创意活跃</span></div>
-                <div><i class="fas fa-arrow-right"></i> 设计冲刺 · 进行中</div>
+        <div class="comp-cell">
+            <span class="label">BTN003 · Nút kính lỏng</span>
+            <button class="glass-button">
+                <div class="glass-filter"></div><div class="glass-overlay"></div>
+                <div class="glass-specular"></div>
+                <span class="glass-content">🚀 Khám Phá Ngay</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ========== SECTION 3: BIỂU TƯỢNG & CHUYỂN ĐỔI ========== -->
+    <div class="section-title">🎛️ Biểu tượng &amp; Chuyển đổi</div>
+    <div class="comp-grid">
+        <div class="comp-cell">
+            <span class="label">ICO001 · Bộ biểu tượng</span>
+            <div class="glass-icons-grid">
+                <div class="glass-icon"><div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div><div class="glass-content"><i class="fas fa-heart"></i></div></div>
+                <div class="glass-icon"><div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div><div class="glass-content"><i class="fas fa-star"></i></div></div>
+                <div class="glass-icon"><div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div><div class="glass-content"><i class="fas fa-bell"></i></div></div>
+                <div class="glass-icon"><div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div><div class="glass-content"><i class="fas fa-comment"></i></div></div>
             </div>
-            <div style="margin-top: 12px; font-size:13px; color:#4b5a72;"><i class="far fa-comment-dots"></i> 团队同步: 新品牌策略即将上线</div>
+        </div>
+        <div class="comp-cell">
+            <span class="label">TGL001 · Công tắc chuyển đổi</span>
+            <div class="glass-toggle-group">
+                <label class="glass-toggle">
+                    <input type="checkbox" class="toggle-input" checked>
+                    <div class="toggle-track"><div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div><div class="toggle-thumb"><div class="glass-overlay"></div></div></div>
+                    <span class="toggle-label">Chế độ tối</span>
+                </label>
+                <label class="glass-toggle">
+                    <input type="checkbox" class="toggle-input">
+                    <div class="toggle-track"><div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div><div class="toggle-thumb"><div class="glass-overlay"></div></div></div>
+                    <span class="toggle-label">Thông báo</span>
+                </label>
+                <label class="glass-toggle">
+                    <input type="checkbox" class="toggle-input" checked>
+                    <div class="toggle-track"><div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div><div class="toggle-thumb"><div class="glass-overlay"></div></div></div>
+                    <span class="toggle-label">Tự động cập nhật</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== SECTION 4: ĐỔ XUỐNG & ĐANG TẢI ========== -->
+    <div class="section-title">📋 Menu &amp; Trạng thái</div>
+    <div class="comp-grid">
+        <div class="comp-cell">
+            <span class="label">DRP001 · Menu thả xuống</span>
+            <div class="glass-dropdown-list">
+                <div class="glass-dropdown">
+                    <input type="checkbox" class="dropdown-toggle" id="dd1">
+                    <label class="dropdown-header" for="dd1">
+                        <div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div>
+                        <div class="glass-content">✨ Tính năng <span class="dropdown-arrow">▼</span></div>
+                    </label>
+                    <div class="dropdown-content">
+                        <div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div>
+                        <div class="glass-content"><ul><li>Thiết kế hiện đại</li><li>Hoạt ảnh mượt mà</li><li>CSS thuần</li><li>Giao diện đáp ứng</li></ul></div>
+                    </div>
+                </div>
+                <div class="glass-dropdown">
+                    <input type="checkbox" class="dropdown-toggle" id="dd2">
+                    <label class="dropdown-header" for="dd2">
+                        <div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div>
+                        <div class="glass-content">📖 Tài liệu <span class="dropdown-arrow">▼</span></div>
+                    </label>
+                    <div class="dropdown-content">
+                        <div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div>
+                        <div class="glass-content">Triển khai CSS thuần, không cần JavaScript!</div>
+                    </div>
+                </div>
+                <div class="glass-dropdown">
+                    <input type="checkbox" class="dropdown-toggle" id="dd3">
+                    <label class="dropdown-header" for="dd3">
+                        <div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div>
+                        <div class="glass-content">🆘 Hỗ trợ <span class="dropdown-arrow">▼</span></div>
+                    </label>
+                    <div class="dropdown-content">
+                        <div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div>
+                        <div class="glass-content">Liên hệ nhóm hỗ trợ để được trợ giúp.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="comp-cell">
+            <span class="label">LDR003 · Vòng xoay tải</span>
+            <div class="glass-spinner">
+                <div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div>
+                <div class="glass-content">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-core"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== SECTION 5: FORM & SIDEBAR ========== -->
+    <div class="section-title">📝 Biểu mẫu &amp; Thanh bên</div>
+    <div class="comp-grid">
+        <div class="comp-cell">
+            <span class="label">FRM001 · Form đăng nhập / đăng ký</span>
+            <div class="glass-form">
+                <div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div>
+                <div class="glass-content">
+                    <div class="form-container login active" id="loginForm">
+                        <h3>Đăng Nhập</h3>
+                        <div class="form-group"><i class="fas fa-user"></i><input type="text" placeholder="Tên người dùng"></div>
+                        <div class="form-group"><i class="fas fa-lock"></i><input type="password" placeholder="Mật khẩu"></div>
+                        <button class="form-submit">Đăng Nhập</button>
+                        <div class="form-switch">Chưa có tài khoản? <a href="#" class="switch-to-register">Đăng ký</a></div>
+                    </div>
+                    <div class="form-container register" id="registerForm">
+                        <h3>Đăng Ký</h3>
+                        <div class="form-group"><i class="fas fa-user"></i><input type="text" placeholder="Tên người dùng"></div>
+                        <div class="form-group"><i class="fas fa-envelope"></i><input type="email" placeholder="Email"></div>
+                        <div class="form-group"><i class="fas fa-lock"></i><input type="password" placeholder="Mật khẩu"></div>
+                        <button class="form-submit">Đăng Ký</button>
+                        <div class="form-switch">Đã có tài khoản? <a href="#" class="switch-to-login">Đăng nhập</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="comp-cell">
+            <span class="label">SBR001 · Thanh bên</span>
+            <div class="glass-sidebar">
+                <div class="glass-filter"></div><div class="glass-overlay"></div><div class="glass-specular"></div>
+                <div class="glass-content">
+                    <div class="sidebar-header"><h3>Menu</h3></div>
+                    <nav class="sidebar-nav">
+                        <a href="#" class="nav-item active"><i class="fas fa-home"></i><span>Trang chủ</span></a>
+                        <a href="#" class="nav-item"><i class="fas fa-user"></i><span>Hồ sơ</span></a>
+                        <a href="#" class="nav-item"><i class="fas fa-cog"></i><span>Cài đặt</span></a>
+                        <a href="#" class="nav-item"><i class="fas fa-chart-bar"></i><span>Phân tích</span></a>
+                        <a href="#" class="nav-item"><i class="fas fa-envelope"></i><span>Tin nhắn</span></a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== MODAL TÙY CHỈNH HÌNH NỀN ========== -->
+<div class="modal" id="customizeModal">
+    <div class="modal-content">
+        <span class="close" onclick="closeCustomizeModal()">&times;</span>
+        <h2>🎨 Tùy chỉnh hình nền</h2>
+        <div class="section">
+            <h3>Màu nền có sẵn</h3>
+            <div class="color-grid" id="colorGrid"></div>
+        </div>
+        <div class="section">
+            <h3>Hoặc tải ảnh của bạn lên</h3>
+            <input type="file" id="bgImageInput" accept="image/*" style="display:none">
+            <button class="btn-apply" onclick="document.getElementById('bgImageInput').click()">📁 Chọn ảnh</button>
+            <button class="btn-apply" id="resetBgBtn" onclick="resetBackground()">🔄 Đặt lại mặc định</button>
         </div>
     </div>
 </div>
 
 <script>
-    (function() {
-        // 获取需要动态改变样式的段落元素
-        const previewPara = document.getElementById('previewParagraph');
-        const teamCardDiv = document.getElementById('teamCard');   // 用来控制边距的容器（段落父级内边距等效）
-        
-        // ---------- 字号控制 (36 + B 核心逻辑) ----------
-        const fontSizeSpan = document.getElementById('currentFontSize');
-        const incFontBtn = document.getElementById('incrementFont');
-        const decFontBtn = document.getElementById('decrementFont');
-        const extraBoldBtn = document.getElementById('extraBoldBtn');
-        
-        let currentFontSize = 36;   // 符合图片描述"36"初始值 (美观, 但段落较大, 但仍经典展示，可配合调整)
-        function applyFontSize() {
-            previewPara.style.fontSize = currentFontSize + 'px';
-            fontSizeSpan.innerText = currentFontSize;
+(function(){
+    // ==================== DARK / LIGHT MODE ====================
+    const html = document.documentElement;
+    const themeIcon = document.getElementById('themeIcon');
+    const themeLabel = document.getElementById('themeLabel');
+
+    function setTheme(mode){
+        html.setAttribute('data-theme', mode);
+        if(mode === 'light'){
+            themeIcon.className = 'fas fa-moon';
+            themeLabel.textContent = 'Chế độ tối';
+        } else {
+            themeIcon.className = 'fas fa-sun';
+            themeLabel.textContent = 'Chế độ sáng';
         }
-        incFontBtn.addEventListener('click', () => {
-            currentFontSize = Math.min(72, currentFontSize + 2);
-            applyFontSize();
-        });
-        decFontBtn.addEventListener('click', () => {
-            currentFontSize = Math.max(12, currentFontSize - 2);
-            applyFontSize();
-        });
-        // 额外 +B 按钮: 增加字体大小并且额外强化粗体感（增加字重 / 加粗）符合 +B 功能
-        extraBoldBtn.addEventListener('click', () => {
-            currentFontSize = Math.min(72, currentFontSize + 2);
-            applyFontSize();
-            // 同时确保粗体样式开启 (增强视觉效果)
-            previewPara.style.fontWeight = '700';
-            if (boldBtn) boldBtn.classList.add('active');
-        });
-        
-        // 边距控制 (4px 核心, 控制段落的外边距或卡片内边距，按照设计直接调整段落所在的父级内边距增加灵活性)
-        const marginSpan = document.getElementById('currentMarginVal');
-        const incMargin = document.getElementById('incrementMargin');
-        const decMargin = document.getElementById('decrementMargin');
-        let currentMargin = 4;   // 初始4px
-        function applyMargin() {
-            // 给段落本身增加 margin 值 （上下左右微调让设计更呼吸）
-            previewPara.style.margin = `${currentMargin}px 0`;
-            marginSpan.innerText = currentMargin;
+        localStorage.setItem('theme', mode);
+    }
+
+    window.toggleTheme = function(){
+        const cur = html.getAttribute('data-theme');
+        setTheme(cur === 'light' ? 'dark' : 'light');
+    };
+
+    const saved = localStorage.getItem('theme') || 'dark';
+    setTheme(saved);
+
+    // ==================== BACKGROUND CUSTOMIZATION ====================
+    const bgSettings = JSON.parse(localStorage.getItem('bgSettings')) || {};
+
+    function applyBackground(){
+        if(bgSettings.type === 'color'){
+            document.body.style.backgroundImage = 'none';
+            document.body.style.backgroundColor = bgSettings.value;
+        } else if(bgSettings.type === 'image'){
+            document.body.style.backgroundImage = `url(${bgSettings.value})`;
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundPosition = 'center';
+            document.body.style.backgroundAttachment = 'fixed';
+            document.body.style.backgroundColor = '';
+        } else {
+            document.body.style.backgroundImage = '';
+            document.body.style.backgroundSize = '';
+            document.body.style.backgroundColor = '';
         }
-        incMargin.addEventListener('click', () => {
-            currentMargin = Math.min(32, currentMargin + 1);
-            applyMargin();
-        });
-        decMargin.addEventListener('click', () => {
-            currentMargin = Math.max(0, currentMargin - 1);
-            applyMargin();
-        });
-        
-        // ----- B / I / U 按钮交互 (IMG_2215 B I U) -----
-        const boldBtn = document.getElementById('toggleBold');
-        const italicBtn = document.getElementById('toggleItalic');
-        const underlineBtn = document.getElementById('toggleUnderline');
-        
-        let isBold = false, isItalic = false, isUnderline = false;
-        
-        function updateStyle() {
-            if (isBold) previewPara.style.fontWeight = '700';
-            else previewPara.style.fontWeight = '400';
-            
-            if (isItalic) previewPara.style.fontStyle = 'italic';
-            else previewPara.style.fontStyle = 'normal';
-            
-            if (isUnderline) previewPara.style.textDecoration = 'underline';
-            else previewPara.style.textDecoration = 'none';
-        }
-        
-        boldBtn.addEventListener('click', () => {
-            isBold = !isBold;
-            if (isBold) boldBtn.classList.add('active');
-            else boldBtn.classList.remove('active');
-            updateStyle();
-        });
-        
-        italicBtn.addEventListener('click', () => {
-            isItalic = !isItalic;
-            if (isItalic) italicBtn.classList.add('active');
-            else italicBtn.classList.remove('active');
-            updateStyle();
-        });
-        
-        underlineBtn.addEventListener('click', () => {
-            isUnderline = !isUnderline;
-            if (isUnderline) underlineBtn.classList.add('active');
-            else underlineBtn.classList.remove('active');
-            updateStyle();
-        });
-        
-        // 补充初始化: 确保段落默认匹配，字体Inter已经在全局生效，另外额外设置段落基础属性
-        previewPara.style.transition = 'all 0.2s ease';
-        previewPara.style.fontFamily = "'Inter', sans-serif";
-        previewPara.style.fontWeight = '400';
-        previewPara.style.fontSize = '36px';     // 匹配初始36px显示 (符合图片里的Bold: 36)
-        currentFontSize = 36;
-        fontSizeSpan.innerText = 36;
-        previewPara.style.margin = '4px 0';
-        currentMargin = 4;
-        marginSpan.innerText = 4;
-        
-        // 微调若用户想重置或优雅展示，已经与描述对齐
-        
-        // 附加: 保留右侧组件全部交互 (无需额外逻辑全部视觉完整)
-        // Book a Call / Upload 按钮 alert (轻度模拟, 不影响界面复用)
-        const uploadBtnElem = document.querySelector('.upload-btn');
-        const bookCallBtn = document.querySelector('.call-btn');
-        const askBadgeElem = document.querySelector('.ask-badge');
-        if (uploadBtnElem) {
-            uploadBtnElem.addEventListener('click', () => {
-                alert('📤 Upload 演示: 可接入文件上传逻辑');
+    }
+
+    const colorPresets = [
+        {name:'Xanh đêm', value:'radial-gradient(ellipse at 30% 20%, #1a1a2e 0%, #0f0f1a 40%, #0a0a0f 80%, #050510 100%)'},
+        {name:'Xám sáng', value:'radial-gradient(ellipse at 30% 20%, #dce3f0 0%, #e8ecf1 40%, #f0f3f8 80%, #d8dde8 100%)'},
+        {name:'Hồng pastel', value:'radial-gradient(ellipse at 30% 20%, #f7c5c5 0%, #f0a8b8 30%, #e8b4c8 55%, #ddb8d8 80%, #cfc4e8 100%)'},
+        {name:'Xanh dương', value:'radial-gradient(ellipse at 30% 20%, #b8d8f8 0%, #8abce8 30%, #98c0e8 55%, #b0c8f0 80%, #c4d8f8 100%)'},
+        {name:'Tím mộng mơ', value:'radial-gradient(ellipse at 30% 20%, #d4b8f0 0%, #b28df0 30%, #c4a8f0 55%, #d8c8f8 80%, #e8d8f8 100%)'},
+        {name:'Xanh lá', value:'radial-gradient(ellipse at 30% 20%, #b8f0d4 0%, #7ed8a0 30%, #98e8b8 55%, #b0f0c8 80%, #c8f8d8 100%)'},
+        {name:'Cam hoàng hôn', value:'radial-gradient(ellipse at 30% 20%, #f0c898 0%, #e8a878 30%, #f0c0a0 55%, #f8d8c0 80%, #f8e8d8 100%)'},
+        {name:'Đen tuyền', value:'#0a0a0a'},
+        {name:'Trắng tinh', value:'#fafafa'}
+    ];
+
+    function renderColorGrid(){
+        const grid = document.getElementById('colorGrid');
+        colorPresets.forEach(c => {
+            const swatch = document.createElement('div');
+            swatch.className = 'color-swatch';
+            swatch.style.background = c.value;
+            swatch.title = c.name;
+            swatch.addEventListener('click', () => {
+                bgSettings.type = 'color';
+                bgSettings.value = c.value;
+                localStorage.setItem('bgSettings', JSON.stringify(bgSettings));
+                applyBackground();
+                closeCustomizeModal();
             });
-        }
-        if (bookCallBtn) {
-            bookCallBtn.addEventListener('click', () => {
-                alert('📞 预约通话 — 集成Calendly或联系表单');
-            });
-        }
-        if (askBadgeElem) {
-            askBadgeElem.addEventListener('click', () => {
-                alert('✨ Ask AI 助手 — 上下文智能设计建议');
-            });
-        }
-        
-        // 搜索框占位监听  (非必要但保留交互)
-        const searchInput = document.getElementById('globalSearch');
-        if(searchInput) {
-            searchInput.addEventListener('input', (e) => {
-                console.log('搜索内容: ', e.target.value);
-                // 实际可拓展为过滤列表或高亮
-            });
-        }
-        
-        // 针对 Filter·2 提供演示，同时确保卡片完全显示4张图片内容
-        // 额外确保 IMG_2213 所有文本可见 : Ask AI， Ella M，Upload, Filter·2, 30 mins，Book a Call，Online，In progress，Search
-        // 没有任何遗漏
-        
-        // 为增加复用示范，展示组件的可移植性，额外导出部分样式(不必须，但保证容器独立)
-        console.log('✅ UI 完整加载 — 完全基于 4张图片设计: 格式化/团队段落/状态看板/徽章');
-        
-        // 细微调整: 在移动端优雅展示
-        const style = document.createElement('style');
-        style.textContent = `
-            .btn-style.active {
-                background: #0f172a;
-                color: white;
-                border-radius: 40px;
+            grid.appendChild(swatch);
+        });
+    }
+
+    document.getElementById('bgImageInput').addEventListener('change', function(e){
+        const file = e.target.files[0];
+        if(!file) return;
+        const reader = new FileReader();
+        reader.onload = function(ev){
+            bgSettings.type = 'image';
+            bgSettings.value = ev.target.result;
+            localStorage.setItem('bgSettings', JSON.stringify(bgSettings));
+            applyBackground();
+            closeCustomizeModal();
+        };
+        reader.readAsDataURL(file);
+    });
+
+    window.resetBackground = function(){
+        localStorage.removeItem('bgSettings');
+        bgSettings.type = null; bgSettings.value = null;
+        applyBackground();
+        closeCustomizeModal();
+    };
+
+    window.openCustomizeModal = function(){
+        document.getElementById('customizeModal').classList.add('open');
+    };
+    window.closeCustomizeModal = function(){
+        document.getElementById('customizeModal').classList.remove('open');
+    };
+    document.getElementById('customizeModal').addEventListener('click', function(e){
+        if(e.target === this) closeCustomizeModal();
+    });
+
+    renderColorGrid();
+    applyBackground();
+
+    // ==================== FORM SWITCH ====================
+    const switchToRegister = document.querySelector('.switch-to-register');
+    const switchToLogin = document.querySelector('.switch-to-login');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+
+    if(switchToRegister && loginForm && registerForm){
+        switchToRegister.addEventListener('click', function(e){
+            e.preventDefault();
+            loginForm.style.opacity = '0'; loginForm.style.transform = 'translateX(-20px)';
+            setTimeout(() => {
+                loginForm.classList.remove('active');
+                registerForm.classList.add('active');
+                setTimeout(() => {
+                    registerForm.style.opacity = '1'; registerForm.style.transform = 'translateX(0)';
+                }, 50);
+            }, 300);
+        });
+    }
+    if(switchToLogin && loginForm && registerForm){
+        switchToLogin.addEventListener('click', function(e){
+            e.preventDefault();
+            registerForm.style.opacity = '0'; registerForm.style.transform = 'translateX(-20px)';
+            setTimeout(() => {
+                registerForm.classList.remove('active');
+                loginForm.classList.add('active');
+                setTimeout(() => {
+                    loginForm.style.opacity = '1'; loginForm.style.transform = 'translateX(0)';
+                }, 50);
+            }, 300);
+        });
+    }
+
+    // ==================== NAV ACTIVE STATE ====================
+    document.querySelectorAll('.nav-list .nav-item').forEach(item => {
+        item.addEventListener('click', function(e){
+            e.preventDefault();
+            document.querySelectorAll('.nav-list .nav-item').forEach(n => n.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // ==================== SIDEBAR ACTIVE STATE ====================
+    document.querySelectorAll('.sidebar-nav .nav-item').forEach(item => {
+        item.addEventListener('click', function(e){
+            e.preventDefault();
+            document.querySelectorAll('.sidebar-nav .nav-item').forEach(n => n.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // ==================== SEARCH SUGGESTIONS ====================
+    const searchInput = document.querySelector('.search-input');
+    const searchSuggestions = document.querySelector('.search-suggestions');
+    if(searchInput && searchSuggestions){
+        searchInput.addEventListener('focus', () => searchSuggestions.classList.add('active'));
+        searchInput.addEventListener('blur', function(e){
+            if(!e.relatedTarget || !e.relatedTarget.closest('.search-suggestions')){
+                setTimeout(() => searchSuggestions.classList.remove('active'), 200);
             }
-            .preview-text strong.highlight-team {
-                font-weight: 800;
-                background: linear-gradient(120deg, #fef3c7, #fff2e0);
-                padding: 0 4px;
-                border-radius: 12px;
-            }
-            /* 模拟更接近图片质感 */
-            .card {
-                backdrop-filter: blur(0px);
-            }
-        `;
-        document.head.appendChild(style);
-    })();
+        });
+        document.querySelectorAll('.search-suggestions li').forEach(li => {
+            li.addEventListener('click', function(){
+                searchInput.value = this.textContent.trim();
+                searchSuggestions.classList.remove('active');
+                searchInput.focus();
+            });
+        });
+    }
+
+    // ==================== FORM SUBMISSION ====================
+    document.querySelectorAll('.glass-form .form-submit').forEach(btn => {
+        btn.addEventListener('click', function(e){
+            e.preventDefault();
+            const original = this.textContent;
+            this.textContent = '✅ Thành công!';
+            this.style.background = 'rgba(72,199,142,.4)';
+            setTimeout(() => {
+                this.textContent = original;
+                this.style.background = '';
+            }, 2000);
+        });
+    });
+
+    console.log('✅ Liquid Glass Showcase đã sẵn sàng — 10 thành phần kính lỏng đã được kích hoạt.');
+})();
 </script>
 </body>
 </html>
