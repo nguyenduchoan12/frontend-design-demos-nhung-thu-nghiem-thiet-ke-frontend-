@@ -452,6 +452,39 @@
         }
         .btn-apply:hover{background:var(--card-hover-bg)}
 
+        /* ========== SỬA LỖI HIỂN THỊ LIGHT MODE ========== */
+        [data-theme="light"] .glass-nav .nav-item,
+        [data-theme="light"] .glass-card .glass-content,
+        [data-theme="light"] .glass-button .glass-content,
+        [data-theme="light"] .glass-icon .glass-content,
+        [data-theme="light"] .dropdown-header .glass-content,
+        [data-theme="light"] .dropdown-content .glass-content,
+        [data-theme="light"] .glass-sidebar .glass-content,
+        [data-theme="light"] .sidebar-nav .nav-item,
+        [data-theme="light"] .glass-form .glass-content,
+        [data-theme="light"] .form-container h3,
+        [data-theme="light"] .form-switch a {
+            color: var(--text) !important;
+        }
+        [data-theme="light"] .search-input {
+            color: var(--text);
+            background: var(--glass-bg);
+        }
+        [data-theme="light"] .search-input::placeholder {
+            color: var(--text-secondary) !important;
+        }
+        [data-theme="light"] .search-icon-pos {
+            color: var(--text-secondary) !important;
+        }
+        [data-theme="light"] .form-group i {
+            color: var(--text-secondary) !important;
+        }
+        [data-theme="light"] .form-submit {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
         /* ========== RESPONSIVE ========== */
         @media(max-width:768px){
             body{padding:1rem}
