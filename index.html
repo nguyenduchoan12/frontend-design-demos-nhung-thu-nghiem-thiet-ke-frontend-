@@ -4,80 +4,247 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Những Demo Thiết Kế Frontend</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', system-ui, sans-serif;
             background: #f4f6fb;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
             color: #1e293b;
+            min-height: 100vh;
+            padding: 3rem 2rem;
         }
+
         .container {
-            max-width: 700px;
-            margin: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
             text-align: center;
+            margin-bottom: 3rem;
         }
-        h1 {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.5px;
         }
-        .subtitle {
+
+        .header .subtitle {
+            font-size: 1.1rem;
             color: #64748b;
-            margin-bottom: 2rem;
+            font-weight: 400;
         }
+
+        .header .badge {
+            display: inline-block;
+            margin-top: 0.75rem;
+            background: #eef2ff;
+            color: #1e3a8a;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Demo Grid */
         .demo-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
         }
+
+        /* Demo Card */
         .demo-card {
-            background: white;
-            border-radius: 28px;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.05);
-            padding: 2rem 1.5rem;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
             text-decoration: none;
             color: #1e293b;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1.2);
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 12px;
+            border: 1px solid #f1f5f9;
         }
+
         .demo-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 36px rgba(0,0,0,0.08);
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+            border-color: #e2e8f0;
         }
-        .demo-icon {
-            font-size: 3rem;
+
+        /* Card Preview Area */
+        .card-preview {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
         }
-        .demo-title {
+
+        .preview-glass {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .preview-studio {
+            background: linear-gradient(135deg, #f4f6fb 0%, #0f172a 100%);
+            color: white;
+        }
+
+        .card-preview .icon {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .demo-card:hover .icon {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        /* Card Body */
+        .card-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .card-body .demo-title {
+            font-size: 1.25rem;
             font-weight: 600;
-            font-size: 1.2rem;
+            color: #0f172a;
         }
-        .demo-desc {
+
+        .card-body .demo-desc {
             font-size: 0.9rem;
             color: #64748b;
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        /* Tags */
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .tag.html { background: #fef2f2; color: #b91c1c; }
+        .tag.css  { background: #eff6ff; color: #1e40af; }
+        .tag.js   { background: #fefce8; color: #a16207; }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        .footer a {
+            color: #0f172a;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+
 <div class="container">
-    <h1> Những Demo Thiết Kế Frontend</h1>
-    <p class="subtitle">Bộ sưu tập các giao diện được xây dựng bằng HTML, CSS và JavaScript thuần.</p>
-    
+    <!-- Header -->
+    <div class="header">
+        <h1> Những Demo Thiết Kế Frontend</h1>
+        <p class="subtitle">Bộ sưu tập các giao diện được xây dựng bằng HTML, CSS và JavaScript thuần.</p>
+        <span class="badge"><i class="fas fa-code-branch"></i> Open Source · MIT License</span>
+    </div>
+
+    <!-- Demo Grid -->
     <div class="demo-grid">
-        
+
+        <!-- Demo 1: Glass Dashboard -->
         <a href="assets/glass/" class="demo-card">
-            
-            <span class="demo-icon"></span>
-            <span class="demo-title"> 1. Glass </span>
-            <span class="demo-desc">Dashboard sáng tạo – Toolbar, Team card, Status badges.</span>
+            <div class="card-preview preview-glass">
+                <span class="icon">🪟</span>
+            </div>
+            <div class="card-body">
+                <div class="demo-title">Glass Dashboard</div>
+                <div class="demo-desc">Dashboard sáng tạo với Toolbar, Team card và Status badges. Thiết kế tối giản, hiện đại.</div>
+                <div class="card-tags">
+                    <span class="tag html">HTML</span>
+                    <span class="tag css">CSS</span>
+                    <span class="tag js">JavaScript</span>
+                </div>
+            </div>
         </a>
-        <!-- Có thể thêm các demo khác sau -->
+
+        <!-- Demo 2: Kree8 Studio (giữ nguyên) -->
+        <a href="assets/glass/" class="demo-card">
+            <div class="card-preview preview-studio">
+                <span class="icon"></span>
+            </div>
+            <div class="card-body">
+                <div class="demo-title">Kree8 Studio</div>
+                <div class="demo-desc">Bảng điều khiển sáng tạo – Định dạng văn bản, B/I/U, Ask AI, trạng thái & tìm kiếm.</div>
+                <div class="card-tags">
+                    <span class="tag html">HTML</span>
+                    <span class="tag css">CSS</span>
+                    <span class="tag js">JavaScript</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Có thể thêm demo mới ở đây -->
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>Được xây dựng bởi <a href="https://github.com/nguyenduchoan12" target="_blank">nguyenduchoan12</a> · Hosted trên <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></p>
     </div>
 </div>
+
 </body>
 </html>
